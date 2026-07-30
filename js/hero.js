@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const isTouch = Boolean(window.utils && window.utils.isTouchDevice());
     const home = data.home || {};
     const skills = Array.isArray(data.skills) ? data.skills : [];
+    const trailSkills = Array.isArray(data.mousetrailSkills) && data.mousetrailSkills.length > 0 ? data.mousetrailSkills : skills;
     const arcFills = {
       left: data.heroArcs?.left?.fill ?? 0,
       right: data.heroArcs?.right?.fill ?? 0
@@ -21,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
     bindArcLabels(data.heroArcs);
     bindArcInteractions();
     renderTouchTags(skills, isTouch, isReduced);
-    initMousetrail(skills, isTouch, isReduced);
+    initMousetrail(trailSkills, isTouch, isReduced);
     initClock();
     initAnimations(arcFills, home.reconLines || [], isReduced);
   });
@@ -100,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
     hero.addEventListener('mousemove', (event) => {
       if (window.scrollY >= hero.offsetHeight) return;
       const now = Date.now();
-      if (now - lastSpawn < 100) return;
+      if (now - lastSpawn < 200) return;
       lastSpawn = now;
 
       const tag = pool[poolIndex];
@@ -113,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { opacity: 0, transform: 'translate(-50%, -50%) scale(0.8)' },
         { opacity: 1, transform: 'translate(-50%, -50%) scale(1.05)', offset: 0.2 },
         { opacity: 0, transform: 'translate(-50%, calc(-50% - 20px)) scale(1)' }
-      ], { duration: 850, easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)' });
+      ], { duration: 2500, easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)' });
     });
   }
 
@@ -153,34 +154,56 @@ document.addEventListener('DOMContentLoaded', () => {
   function initAnimations(arcFills, reconLines, isReduced) {
     if (typeof gsap === 'undefined') return;
     const setupScroll = () => {
-      if (isReduced || typeof ScrollTrigger === 'undefined') return;
+      if (typeof ScrollTrigger === 'undefined') return;
       gsap.registerPlugin(ScrollTrigger);
-      gsap.to('.arc-fill-rect', {
-        scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true },
-        attr: { y: 400 }, ease: 'none'
-      });
-      gsap.to('.hero-center', {
-        scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true },
-        opacity: 0, y: -30, ease: 'none'
-      });
-      gsap.to('.telemetry-corner, .recon-panel', {
-        scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true },
-        opacity: 0, ease: 'none'
-      });
-      ScrollTrigger.create({
-        trigger: hero,
-        start: 'top top',
-        end: 'bottom top',
-        onEnter: () => document.body.classList.add('hide-custom-cursor'),
-        onEnterBack: () => document.body.classList.add('hide-custom-cursor'),
-        onLeave: () => document.body.classList.remove('hide-custom-cursor')
-      });
+
+      if (!isReduced) {
+        gsap.to('.arc-fill-rect', {
+          scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true },
+          attr: { y: 400 }, ease: 'none', immediateRender: false
+        });
+        gsap.to('.hero-center', {
+          scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true },
+          opacity: 0, y: -30, ease: 'none', immediateRender: false
+        });
+        gsap.to('.telemetry-corner, .recon-panel', {
+          scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true },
+          opacity: 0, ease: 'none', immediateRender: false
+        });
+      }
+
       ScrollTrigger.create({
         trigger: '.stats-strip-section',
         start: 'top 80%',
         once: true,
-        onEnter: () => window.startStatsCounter?.()
+        onEnter: () => {
+          window.startStatsCounter?.();
+          if (!isReduced) {
+            gsap.fromTo('.stat-block', 
+              { autoAlpha: 0, y: 20 },
+              { autoAlpha: 1, y: 0, duration: 1, stagger: 0.1, ease: 'power3.out' }
+            );
+          }
+        }
       });
+
+      if (!isReduced) {
+        ScrollTrigger.create({
+          trigger: '.cta-zone',
+          start: 'top 75%',
+          once: true,
+          onEnter: () => {
+            gsap.fromTo(['#cta-eyebrow', '#cta-heading', '#cta-description'], 
+              { autoAlpha: 0, y: 20 },
+              { autoAlpha: 1, y: 0, duration: 1, stagger: 0.1, ease: 'power3.out' }
+            );
+            gsap.fromTo('.cta-card', 
+              { autoAlpha: 0, y: 30 },
+              { autoAlpha: 1, y: 0, duration: 1, stagger: 0.1, ease: 'power3.out', delay: 0.2 }
+            );
+          }
+        });
+      }
     };
 
     if (isReduced) {
@@ -224,7 +247,18 @@ document.addEventListener('DOMContentLoaded', () => {
       link.href = card.href;
       link.className = 'cta-card';
       link.setAttribute('aria-label', card.label);
-      link.innerHTML = `<span class="cta-card-inner"><span class="cta-card-icon mono text-accent">${String(index + 1).padStart(2, '0')}</span><span class="cta-card-content"><span class="cta-card-title mono"></span><span class="cta-card-desc"></span></span><span class="cta-card-arrow" aria-hidden="true">→</span></span>`;
+      link.innerHTML = `
+        <span class="cta-card-inner">
+          <span class="cta-card-icon mono text-accent">
+            ${String(index + 1).padStart(2, '0')}
+          </span>
+          <span class="cta-card-content">
+            <span class="cta-card-title mono"></span>
+            <span class="cta-card-desc"></span>
+          </span>
+          <span class="cta-card-arrow" aria-hidden="true">→</span>
+        </span>
+      `;
       link.querySelector('.cta-card-title').textContent = card.label;
       link.querySelector('.cta-card-desc').textContent = card.description;
       cards.appendChild(link);

@@ -26,9 +26,9 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
         <div class="cmd-group" data-group="actions">
           <div class="cmd-group-label">Actions</div>
-          <a href="#" class="cmd-item action-github" tabindex="-1">Open GitHub</a>
-          <a href="#" class="cmd-item action-resume" tabindex="-1">Download Résumé</a>
-          <a href="#" class="cmd-item action-email" tabindex="-1">Copy Email</a>
+          <a href="#" class="cmd-item action-github" data-tags="about contact" tabindex="-1">Open GitHub</a>
+          <a href="#" class="cmd-item action-resume" data-tags="about contact" tabindex="-1">Download Résumé</a>
+          <a href="#" class="cmd-item action-email" data-tags="about contact" tabindex="-1">Copy Email</a>
         </div>
         <div class="cmd-empty" style="display: none; padding: 1.5rem; text-align: center; color: var(--muted); font-family: var(--font-mono);">
           No results found
@@ -39,13 +39,13 @@ document.addEventListener('DOMContentLoaded', () => {
   document.body.appendChild(overlay);
 
   const input = overlay.querySelector('.cmd-input');
-  const items = Array.from(overlay.querySelectorAll('.cmd-item'));
+  let items = Array.from(overlay.querySelectorAll('.cmd-item'));
   let selectedIndex = 0;
 
   // Wait for content to load to populate projects and actions
   if (window.siteContentPromise) {
     window.siteContentPromise.then(data => {
-      if (data && data.projects) {
+      if (data?.projects) {
         const projectsGroup = overlay.querySelector('[data-group="projects"]');
         data.projects.forEach(p => {
           const a = document.createElement('a');
@@ -54,14 +54,18 @@ document.addEventListener('DOMContentLoaded', () => {
           a.tabIndex = -1;
           a.textContent = p.name;
           projectsGroup.appendChild(a);
-          items.push(a); // Add to searchable items
         });
+        
+        // Re-sync items array so keyboard navigation matches the visual DOM sequence perfectly
+        items = Array.from(overlay.querySelectorAll('.cmd-item'));
         projectsGroup.style.display = 'block';
       }
-      if (data && data.contact && data.contact.links) {
+      
+      if (data?.contact?.links?.github) {
         overlay.querySelector('.action-github').href = data.contact.links.github;
       }
-      if (data && data.assets) {
+      
+      if (data?.assets?.resume) {
         overlay.querySelector('.action-resume').href = data.assets.resume;
       }
     });
@@ -97,7 +101,12 @@ document.addEventListener('DOMContentLoaded', () => {
     let hasResults = false;
     
     items.forEach(item => {
-      if (item.textContent.toLowerCase().includes(q)) {
+      const group = item.closest('.cmd-group');
+      const groupName = group ? group.dataset.group.toLowerCase() : '';
+      const tags = item.dataset.tags ? item.dataset.tags.toLowerCase() : '';
+      const searchableText = `${item.textContent.toLowerCase()} ${groupName} ${tags}`;
+      
+      if (searchableText.includes(q)) {
         item.style.display = 'flex';
         hasResults = true;
       } else {

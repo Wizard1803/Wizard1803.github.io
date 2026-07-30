@@ -47,10 +47,10 @@
 .nav-cmd-trigger {
   font-family: var(--font-mono);
   font-size: var(--font-size-min);
-  border: 1px solid var(--dim);
-  padding: 0.25rem 0.5rem;
+  border: 1px solid var(--accent);
+  padding: 0.5rem 1rem;
   border-radius: 4px;
-  color: var(--muted);
+  color: var(--text);
   transition: border-color 0.3s cubic-bezier(0.32, 0.72, 0, 1), color 0.3s cubic-bezier(0.32, 0.72, 0, 1), transform 0.15s ease;
 }
 
@@ -93,7 +93,7 @@
 }
 
 .cmd-input-wrapper {
-  padding: 1rem 1.5rem;
+  padding: 0.5rem 1rem;
   border-bottom: 1px solid var(--dim);
 }
 
@@ -104,6 +104,7 @@
   color: var(--text-bright);
   font-family: var(--font-mono);
   font-size: 1.1rem;
+  padding: 1rem 0.5rem;
   outline: none;
 }
 
@@ -111,6 +112,11 @@
   max-height: 40vh;
   overflow-y: auto;
   padding: 1rem 0;
+  scrollbar-width: none;
+}
+
+.cmd-results::-webkit-scrollbar {
+  display: none;
 }
 
 .cmd-group {
@@ -199,8 +205,9 @@
 
 /* Cursor System */
 @media (pointer: fine) {
-  body.custom-cursor {
-    cursor: none;
+  body.custom-cursor,
+  body.custom-cursor *:not(input):not(textarea) {
+    cursor: none !important;
   }
 
   .cursor-dot {
