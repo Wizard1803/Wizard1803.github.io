@@ -1,11 +1,12 @@
 <!-- index.html — Home page (hero dashboard) -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>WIZARD — Red Teamer in Training</title>
-  
+
   <!-- Phase 1 Foundation CSS -->
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/base.css">
@@ -26,8 +27,9 @@
   <script src="js/hero.js?v=hero-motion-3" defer></script>
   <script src="js/stats-counter.js" defer></script>
 </head>
+
 <body>
-  
+
   <!-- Global Nav Capsule -->
   <nav class="nav-capsule glass-panel">
     <div class="nav-logo">PIYUSH</div>
@@ -46,7 +48,7 @@
     <section class="hero-section" id="hero-section">
       <!-- Mousetrail container (replaces canvas) -->
       <div id="mousetrail-container" class="mousetrail-container"></div>
-      
+
       <!-- Telemetry Corners -->
       <div class="telemetry-corner top-left mono text-muted">
         <span id="local-time">00:00:00</span>
@@ -59,29 +61,62 @@
         <!-- Left Sidebar: Left Arc -->
         <div class="hero-sidebar left">
           <div class="gauge-arc" id="arc-left">
-            <svg class="arc-svg" viewBox="0 0 100 400" preserveAspectRatio="none">
-              <!-- Defs for gradients -->
+            <svg class="arc-svg" viewBox="0 0 120 400" preserveAspectRatio="none" style="overflow: visible;">
               <defs>
+                <!-- Vertical Color Gradient (Transparent -> Gold -> Red) -->
                 <linearGradient id="left-arc-grad" x1="0" y1="1" x2="0" y2="0">
-                  <stop offset="0%" stop-color="var(--accent-gold, #ffb5a0)" />
-                  <stop offset="70%" stop-color="var(--accent)" />
-                  <stop offset="100%" stop-color="var(--accent2)" />
+                  <stop offset="0%" stop-color="var(--accent-gold, #ffb5a0)" stop-opacity="0" />
+                  <stop offset="25%" stop-color="var(--accent-gold, #ffb5a0)" stop-opacity="1" />
+                  <stop offset="70%" stop-color="var(--accent)" stop-opacity="1" />
+                  <stop offset="100%" stop-color="var(--accent2)" stop-opacity="1" />
                 </linearGradient>
-                <clipPath id="left-arc-clip">
-                  <rect class="arc-fill-rect" x="0" y="400" width="100" height="400" />
-                </clipPath>
+
+                <!-- GSAP Animation Mask (Replaces Clip Path) -->
+                <linearGradient id="mask-grad" x1="0" y1="1" x2="0" y2="0">
+                  <stop offset="0%" stop-color="#000" />
+                  <stop offset="100%" stop-color="#fff" />
+                </linearGradient>
+                <mask id="left-arc-mask" maskUnits="userSpaceOnUse" x="-50" y="-50" width="220" height="500">
+                  <rect class="arc-fill-rect" x="-50" y="400" width="220" height="400" fill="url(#mask-grad)" />
+                </mask>
+
+                <!-- Perfectly Smooth Inner Blend Filter -->
+                <filter id="left-white-edge" filterUnits="userSpaceOnUse" x="-50" y="-50" width="220" height="500">
+                  <!-- Smooth blur for the inner mix -->
+                  <feGaussianBlur in="SourceAlpha" stdDeviation="5" result="blur" />
+                  <!-- Shift inward to expose the outer edge -->
+                  <feOffset dx="6" dy="0" in="blur" result="offsetBlur" />
+                  <!-- Clip perfectly to the razor-sharp outer boundary of SourceAlpha -->
+                  <feComposite in="SourceAlpha" in2="offsetBlur" operator="out" result="edgeGlowAlpha" />
+                  <!-- Flood with intensely bright white -->
+                  <feFlood flood-color="#ffffff" flood-opacity="0.9" result="colorWhite" />
+                  <feComposite in="colorWhite" in2="edgeGlowAlpha" operator="in" result="whiteGlow" />
+                  <!-- Merge base color with the smooth white inner glow -->
+                  <feMerge>
+                    <feMergeNode in="SourceGraphic" />
+                    <feMergeNode in="whiteGlow" />
+                  </feMerge>
+                </filter>
               </defs>
-              <!-- Background Path -->
-              <path class="arc-bg" d="M 90,400 L 90,250 L 20,50 L 20,0" fill="none" stroke="var(--dim)" stroke-width="4" />
-              <!-- Fill Path -->
-              <path class="arc-fill" d="M 90,400 L 90,250 L 20,50 L 20,0" fill="none" stroke="url(#left-arc-grad)" stroke-width="4" clip-path="url(#left-arc-clip)" />
-              <!-- Tick Marks -->
+
+              <!-- Layer 1: Base Casing (Pitch Black) -->
+              <path class="arc-bg" d="M 105,380 L 15,200 L 105,20" fill="none" stroke="#000000"
+                stroke-width="26" stroke-linecap="butt" stroke-linejoin="miter" />
+                
+              <!-- Layer 2: Permanent Outer Trace Line (Visible natively in the transparent bottom) -->
+              <path class="arc-outline" d="M 105,380 L 15,200 L 105,20" transform="translate(-13, 0)" fill="none"
+                stroke="rgba(255,255,255,0.4)" stroke-width="2" stroke-linecap="butt" stroke-linejoin="miter" />
+
+              <!-- Layer 3: The Illuminated Color Fill & Smooth Inner Edge Gradient -->
+              <g mask="url(#left-arc-mask)">
+                <!-- Base Vertical Color with the Smooth Filter Applied -->
+                <path class="arc-fill" d="M 105,380 L 15,200 L 105,20" fill="none" stroke="url(#left-arc-grad)"
+                  stroke-width="26" stroke-linecap="butt" stroke-linejoin="miter" filter="url(#left-white-edge)" />
+              </g>
+
+              <!-- Layer 4: Needle Tick -->
               <g class="arc-ticks">
-                <line x1="20" y1="10" x2="5" y2="10" stroke="var(--accent2)" stroke-width="2" />
-                <line x1="40" y1="107" x2="25" y2="107" stroke="var(--muted)" stroke-width="1" />
-                <line x1="60" y1="164" x2="45" y2="164" stroke="var(--muted)" stroke-width="1" />
-                <line x1="80" y1="221" x2="65" y2="221" stroke="var(--muted)" stroke-width="1" />
-                <line x1="90" y1="380" x2="75" y2="380" stroke="var(--muted)" stroke-width="1" />
+                <polygon class="arc-needle" points="90,18 120,20 90,22" fill="var(--accent2)" />
               </g>
             </svg>
             <div class="arc-label-container" id="label-left-container">
@@ -90,55 +125,82 @@
             </div>
           </div>
         </div>
-        
+
         <!-- Center: Main Focus -->
         <div class="hero-center" id="heroCenter">
           <div class="glitch-wrapper">
             <h1 class="glitch-text" id="hero-name" data-text="LOADING…">LOADING…</h1>
           </div>
-          
+
           <div class="title-scroller">
             <h2 class="subtitle mono text-accent" id="hero-title">INITIALIZING SYSTEM…</h2>
           </div>
-          
+
           <div class="status-line mono text-muted">
             <span class="status-dot"></span> <span id="hero-status"></span>
           </div>
-          
+
           <div class="scroll-indicator">
             <span class="mono text-muted" id="scroll-prompt" style="font-size: 10px;"></span>
             <div class="scroll-line"></div>
           </div>
-          
+
           <div class="touch-tags-row" id="touch-tags"></div>
         </div>
-        
+
         <!-- Right Sidebar: Right Arc & Recon Panel -->
         <div class="hero-sidebar right">
           <div class="gauge-arc" id="arc-right">
-            <svg class="arc-svg" viewBox="0 0 100 400" preserveAspectRatio="none">
-              <!-- Defs for gradients -->
+            <svg class="arc-svg" viewBox="0 0 120 400" preserveAspectRatio="none" style="overflow: visible;">
               <defs>
                 <linearGradient id="right-arc-grad" x1="0" y1="1" x2="0" y2="0">
-                  <stop offset="0%" stop-color="var(--accent-gold, #ffb5a0)" />
-                  <stop offset="70%" stop-color="var(--accent)" />
-                  <stop offset="100%" stop-color="var(--accent2)" />
+                  <stop offset="0%" stop-color="var(--accent-gold, #ffb5a0)" stop-opacity="0" />
+                  <stop offset="25%" stop-color="var(--accent-gold, #ffb5a0)" stop-opacity="1" />
+                  <stop offset="70%" stop-color="var(--accent)" stop-opacity="1" />
+                  <stop offset="100%" stop-color="var(--accent2)" stop-opacity="1" />
                 </linearGradient>
-                <clipPath id="right-arc-clip">
-                  <rect class="arc-fill-rect" x="0" y="400" width="100" height="400" />
-                </clipPath>
+                <mask id="right-arc-mask" maskUnits="userSpaceOnUse" x="-50" y="-50" width="220" height="500">
+                  <rect class="arc-fill-rect" x="-50" y="400" width="220" height="400" fill="url(#mask-grad)" />
+                </mask>
+
+                <!-- Perfectly Smooth Inner Blend Filter (Right Side) -->
+                <filter id="right-white-edge" filterUnits="userSpaceOnUse" x="-50" y="-50" width="220" height="500">
+                  <!-- Smooth blur for the inner mix -->
+                  <feGaussianBlur in="SourceAlpha" stdDeviation="5" result="blur" />
+                  <!-- Shift inward (negative X for right side) to expose the outer edge -->
+                  <feOffset dx="-6" dy="0" in="blur" result="offsetBlur" />
+                  <!-- Clip perfectly to the razor-sharp outer boundary of SourceAlpha -->
+                  <feComposite in="SourceAlpha" in2="offsetBlur" operator="out" result="edgeGlowAlpha" />
+                  <!-- Flood with intensely bright white -->
+                  <feFlood flood-color="#ffffff" flood-opacity="0.9" result="colorWhite" />
+                  <feComposite in="colorWhite" in2="edgeGlowAlpha" operator="in" result="whiteGlow" />
+                  <!-- Merge base color with the smooth white inner glow -->
+                  <feMerge>
+                    <feMergeNode in="SourceGraphic" />
+                    <feMergeNode in="whiteGlow" />
+                  </feMerge>
+                </filter>
               </defs>
-              <!-- Background Path -->
-              <path class="arc-bg" d="M 10,400 L 10,250 L 80,50 L 80,0" fill="none" stroke="var(--dim)" stroke-width="4" />
-              <!-- Fill Path -->
-              <path class="arc-fill" d="M 10,400 L 10,250 L 80,50 L 80,0" fill="none" stroke="url(#right-arc-grad)" stroke-width="4" clip-path="url(#right-arc-clip)" />
-              <!-- Tick Marks -->
+
+              <!-- Layer 1: Base Casing (Pitch Black) -->
+              <path class="arc-bg" d="M 15,380 L 105,200 L 15,20" fill="none" stroke="#000000"
+                stroke-width="26" stroke-linecap="butt" stroke-linejoin="miter" />
+                
+              <!-- Layer 2: Permanent Outer Trace Line -->
+              <!-- Shifted Right (+13) -->
+              <path class="arc-outline" d="M 15,380 L 105,200 L 15,20" transform="translate(13, 0)" fill="none"
+                stroke="rgba(255,255,255,0.4)" stroke-width="2" stroke-linecap="butt" stroke-linejoin="miter" />
+
+              <!-- Layer 3: The Illuminated Color Fill & Smooth Inner Edge Gradient -->
+              <g mask="url(#right-arc-mask)">
+                <!-- Base Vertical Color with Smooth Filter Applied -->
+                <path class="arc-fill" d="M 15,380 L 105,200 L 15,20" fill="none" stroke="url(#right-arc-grad)"
+                  stroke-width="26" stroke-linecap="butt" stroke-linejoin="miter" filter="url(#right-white-edge)" />
+              </g>
+
+              <!-- Layer 4: Needle Tick -->
               <g class="arc-ticks">
-                <line x1="80" y1="10" x2="95" y2="10" stroke="var(--accent2)" stroke-width="2" />
-                <line x1="60" y1="107" x2="75" y2="107" stroke="var(--muted)" stroke-width="1" />
-                <line x1="40" y1="164" x2="55" y2="164" stroke="var(--muted)" stroke-width="1" />
-                <line x1="20" y1="221" x2="35" y2="221" stroke="var(--muted)" stroke-width="1" />
-                <line x1="10" y1="380" x2="25" y2="380" stroke="var(--muted)" stroke-width="1" />
+                <polygon class="arc-needle" points="30,18 0,20 30,22" fill="var(--accent2)" />
               </g>
             </svg>
             <div class="arc-label-container" id="label-right-container">
@@ -146,7 +208,7 @@
               <span class="arc-reveal mono text-accent">LOADING…</span>
             </div>
           </div>
-          
+
           <!-- Recon Output Panel -->
           <div class="recon-panel glass-panel">
             <div class="recon-terminal">

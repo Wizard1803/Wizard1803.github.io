@@ -230,7 +230,10 @@ document.addEventListener('DOMContentLoaded', () => {
       .to('.title-scroller, .status-line', { opacity: 1, duration: 0.4, stagger: 0.05 }, 1.6)
       .to('.recon-panel', { opacity: 1, duration: 0.25 }, 2.0)
       .call(() => initRecon(reconLines, false), [], 2.0)
-      .to('.scroll-indicator', { opacity: 1, duration: 0.4 }, 2.0);
+      .to('.scroll-indicator', { opacity: 1, duration: 0.4 }, 2.0)
+      .call(() => {
+        document.querySelectorAll('.arc-fill').forEach(el => el.classList.add('is-pulsing'));
+      }, [], 2.4);
     setupScroll();
   }
 

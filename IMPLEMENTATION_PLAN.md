@@ -5,8 +5,10 @@ This plan follows the rigid phase structure outlined in `ANTIGRAVITY_PROMPT.md` 
 ## Current Status
 
 > [!WARNING]
-> **User Review Required: Codex Reversions** 
-> Codex (in Session 8) removed the continuous Stitch glitch animation from the Home Hero and replaced it with a slow decrypt sequence. I propose we revert this specific change to restore the premium glitch effect you requested. Review the **Codex Modification Report** artifact and approve this plan to restore it.
+> **Stack Lock Conflict Identified**
+> You asked to read the `/shadcn-ui` docs for UI inspiration. However, `AGENTS.md` strictly enforces a Vanilla HTML/CSS/JS stack with no React or Tailwind. Because `shadcn-ui` is built exclusively on React and Tailwind, using it directly violates the project's hard constraints. 
+> 
+> **Resolution:** We will stick to the Vanilla HTML/CSS/JS stack as mandated by `AGENTS.md`. We will NOT use React or Tailwind. We will rely on Vanilla CSS and the `stitch-design-taste` rules.
 
 ## Phases
 

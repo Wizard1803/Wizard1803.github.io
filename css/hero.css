@@ -24,15 +24,15 @@
 }
 
 .hero-section::before {
-  background-image: 
-    repeating-linear-gradient(45deg, #080a0c 25%, transparent 25%, transparent 75%, #080a0c 75%, #080a0c), 
+  background-image:
+    repeating-linear-gradient(45deg, #080a0c 25%, transparent 25%, transparent 75%, #080a0c 75%, #080a0c),
     repeating-linear-gradient(45deg, #080a0c 25%, #0c0e10 25%, #0c0e10 75%, #080a0c 75%, #080a0c);
   background-size: 20px 20px;
   opacity: 0.4;
 }
 
 .hero-section::after {
-  background-image: repeating-linear-gradient(135deg, transparent, transparent 10px, rgba(255,255,255,0.02) 10px, rgba(255,255,255,0.02) 11px);
+  background-image: repeating-linear-gradient(135deg, transparent, transparent 10px, rgba(255, 255, 255, 0.02) 10px, rgba(255, 255, 255, 0.02) 11px);
   background-size: 100% 100%;
   opacity: 0.3;
 }
@@ -72,8 +72,17 @@
   opacity: 0;
   pointer-events: none;
 }
-.telemetry-corner.top-left { top: 2rem; left: 2rem; }
-.telemetry-corner.top-right { top: 2rem; right: 2rem; width: 60px; }
+
+.telemetry-corner.top-left {
+  top: 2rem;
+  left: 2rem;
+}
+
+.telemetry-corner.top-right {
+  top: 2rem;
+  right: 2rem;
+  width: 60px;
+}
 
 .telemetry-line {
   width: 100%;
@@ -91,7 +100,7 @@
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-columns: 250px 1fr 250px;
+  grid-template-columns: 280px 1fr 280px;
   gap: 2rem;
   padding: 6rem 2rem 2rem 2rem;
   max-width: 1600px;
@@ -111,8 +120,14 @@
   height: 100%;
   opacity: 0;
 }
-.hero-sidebar.left .gauge-arc { right: 0; }
-.hero-sidebar.right .gauge-arc { left: 0; }
+
+.hero-sidebar.left .gauge-arc {
+  right: 0;
+}
+
+.hero-sidebar.right .gauge-arc {
+  left: 0;
+}
 
 /* Unified Stat Block */
 .stat-block {
@@ -137,7 +152,7 @@
   font-size: 2rem;
   color: var(--text-bright);
   line-height: 1;
-  text-shadow: 0 0 10px rgba(255,255,255,0.1);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
 }
 
 /* ==========================================================================
@@ -147,7 +162,7 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 150px;
+  width: 180px;
   height: 400px;
   display: flex;
   flex-direction: column;
@@ -164,6 +179,52 @@
   pointer-events: none;
 }
 
+/* Chevron Arc — Stroke rendering */
+.arc-outline {
+  stroke-linecap: butt;
+  stroke-linejoin: miter;
+}
+
+.arc-fill {
+  stroke-linecap: butt;
+  stroke-linejoin: miter;
+}
+
+/* Perpetual micro-pulse (stitch-design-taste §8) */
+@keyframes arc-pulse {
+
+  0%,
+  100% {
+    opacity: 0.88;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Subtle breathing pulse applied after entrance */
+.arc-fill.is-pulsing {
+  animation: arc-pulse 4s ease-in-out infinite alternate;
+}
+
+/* Redline tension glow */
+@keyframes redline-pulse {
+
+  0%,
+  100% {
+    opacity: 0.7;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+.arc-redline {
+  animation: redline-pulse 2.5s ease-in-out infinite;
+}
+
 .arc-label-container {
   position: relative;
   cursor: pointer;
@@ -177,7 +238,8 @@
   z-index: 20;
 }
 
-.arc-label, .arc-reveal {
+.arc-label,
+.arc-reveal {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -224,14 +286,17 @@
 }
 
 .recon-terminal {
-  background: rgba(0, 0, 0, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.85) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.04);
   border-radius: calc(var(--radius-lg) - 0.5rem);
   padding: 1.25rem;
   height: 100%;
   width: 100%;
   overflow: hidden;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  /* Tactile Soft Depth: Recessed screen */
+  box-shadow: inset 0 4px 16px rgba(0, 0, 0, 0.8),
+    inset 0 1px 4px rgba(0, 0, 0, 0.6),
+    0 1px 0 rgba(255, 255, 255, 0.05);
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -252,8 +317,15 @@
 }
 
 @keyframes fade-in-up {
-  from { opacity: 0; transform: translateY(5px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .status-line {
@@ -274,8 +346,17 @@
 }
 
 @keyframes pulse-dot {
-  0%, 100% { opacity: 0.3; box-shadow: 0 0 0 rgba(232, 255, 0, 0); }
-  50% { opacity: 1; box-shadow: 0 0 8px rgba(232, 255, 0, 0.6); }
+
+  0%,
+  100% {
+    opacity: 0.3;
+    box-shadow: 0 0 0 rgba(232, 255, 0, 0);
+  }
+
+  50% {
+    opacity: 1;
+    box-shadow: 0 0 8px rgba(232, 255, 0, 0.6);
+  }
 }
 
 /* ==========================================================================
@@ -328,27 +409,95 @@
 
 /* Idle tension glitch (happens occasionally) */
 @keyframes glitch-anim-main {
-  0%, 94% { transform: translateX(0) skewX(0); }
-  95% { transform: translateX(-2px) skewX(1deg); }
-  96% { transform: translateX(2px) skewX(-1deg); }
-  97% { transform: translateX(0) skewX(0); }
-  100% { transform: translateX(0); }
+
+  0%,
+  94% {
+    transform: translateX(0) skewX(0);
+  }
+
+  95% {
+    transform: translateX(-2px) skewX(1deg);
+  }
+
+  96% {
+    transform: translateX(2px) skewX(-1deg);
+  }
+
+  97% {
+    transform: translateX(0) skewX(0);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
 }
 
 @keyframes glitch-anim {
-  0%, 94% { transform: translateX(0); opacity: 0; filter: none; }
-  95% { transform: translateX(-4px); opacity: 0.8; filter: blur(2px); }
-  97% { transform: translateX(3px); opacity: 0.8; filter: blur(1px); }
-  99% { transform: translateX(-2px); opacity: 0.8; filter: blur(2px); }
-  100% { transform: translateX(0); opacity: 0; filter: none; }
+
+  0%,
+  94% {
+    transform: translateX(0);
+    opacity: 0;
+    filter: none;
+  }
+
+  95% {
+    transform: translateX(-4px);
+    opacity: 0.8;
+    filter: blur(2px);
+  }
+
+  97% {
+    transform: translateX(3px);
+    opacity: 0.8;
+    filter: blur(1px);
+  }
+
+  99% {
+    transform: translateX(-2px);
+    opacity: 0.8;
+    filter: blur(2px);
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 0;
+    filter: none;
+  }
 }
 
 @keyframes glitch-anim2 {
-  0%, 94% { transform: translateX(0); opacity: 0; filter: none; }
-  95% { transform: translateX(3px); opacity: 0.8; filter: blur(2px); }
-  97% { transform: translateX(-4px); opacity: 0.8; filter: blur(1px); }
-  99% { transform: translateX(2px); opacity: 0.8; filter: blur(2px); }
-  100% { transform: translateX(0); opacity: 0; filter: none; }
+
+  0%,
+  94% {
+    transform: translateX(0);
+    opacity: 0;
+    filter: none;
+  }
+
+  95% {
+    transform: translateX(3px);
+    opacity: 0.8;
+    filter: blur(2px);
+  }
+
+  97% {
+    transform: translateX(-4px);
+    opacity: 0.8;
+    filter: blur(1px);
+  }
+
+  99% {
+    transform: translateX(2px);
+    opacity: 0.8;
+    filter: blur(2px);
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 0;
+    filter: none;
+  }
 }
 
 /* ==========================================================================
@@ -387,16 +536,26 @@
 .scroll-line::after {
   content: '';
   position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background: var(--accent);
   animation: scroll-pulse 2s infinite ease-in-out;
 }
 
 @keyframes scroll-pulse {
-  0% { transform: translateY(-100%); }
-  50% { transform: translateY(0); }
-  100% { transform: translateY(100%); }
+  0% {
+    transform: translateY(-100%);
+  }
+
+  50% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(100%);
+  }
 }
 
 /* ==========================================================================
@@ -493,21 +652,29 @@
   text-decoration: none;
   padding: 3px;
   border-radius: 1rem;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  /* Tactile Drop Shadow for elevated hardware look */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4),
+    0 1px 2px rgba(0, 0, 0, 0.6);
   transition: transform 0.5s cubic-bezier(0.32, 0.72, 0, 1),
-              border-color 0.4s cubic-bezier(0.32, 0.72, 0, 1),
-              box-shadow 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+    border-color 0.4s cubic-bezier(0.32, 0.72, 0, 1),
+    box-shadow 0.4s cubic-bezier(0.32, 0.72, 0, 1);
 }
 
 .cta-card:hover {
   transform: translateY(-2px);
   border-color: rgba(232, 255, 0, 0.4);
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(232, 255, 0, 0.08);
+  /* Tactile Lift */
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6),
+    0 4px 12px rgba(232, 255, 0, 0.08);
 }
 
 .cta-card:active {
-  transform: scale(0.985);
+  transform: scale(0.97) translateY(2px);
+  /* Tactile Press - tightens shadow, feels pushed in */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.8),
+    0 0 0 rgba(232, 255, 0, 0.1);
 }
 
 .cta-card:focus-visible {
@@ -521,8 +688,23 @@
   gap: 1.25rem;
   padding: 1.5rem 1.75rem;
   border-radius: calc(1rem - 3px);
-  background: rgba(13, 17, 23, 0.7);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  /* High-End Technique: Base color transitions smoothly, while the static gradient adds directional depth */
+  background-color: rgba(232, 255, 0, 0.02);
+  background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, transparent 100%);
+  /* Tactile Inner Highlight (bevel) - stronger top edge as requested */
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.15),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.4);
+  transition: background-color 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.cta-card:hover .cta-card-inner {
+  /* State-based color system: Hover overlay (lighter/more opaque) */
+  background-color: rgba(232, 255, 0, 0.10);
+}
+
+.cta-card:active .cta-card-inner {
+  /* State-based color system: Active overlay (pressed/darker) */
+  background-color: rgba(232, 255, 0, 0.06);
 }
 
 .cta-card-icon {
@@ -538,7 +720,7 @@
   font-size: 1.1rem;
   letter-spacing: 0.05em;
   transition: background 0.4s cubic-bezier(0.32, 0.72, 0, 1),
-              transform 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+    transform 0.4s cubic-bezier(0.32, 0.72, 0, 1);
 }
 
 .cta-card:hover .cta-card-icon {
@@ -579,8 +761,8 @@
   color: var(--muted);
   font-size: 1.1rem;
   transition: transform 0.5s cubic-bezier(0.32, 0.72, 0, 1),
-              background 0.4s cubic-bezier(0.32, 0.72, 0, 1),
-              color 0.3s ease;
+    background 0.4s cubic-bezier(0.32, 0.72, 0, 1),
+    color 0.3s ease;
 }
 
 .cta-card:hover .cta-card-arrow {
@@ -647,17 +829,16 @@
     grid-template-rows: auto 1fr auto;
     padding-top: 6rem;
   }
-  
+
   .hero-sidebar {
     align-items: center !important;
     text-align: center;
   }
-  
-  .objective-panel {
-    border-left: none;
-    border-top: 2px solid var(--accent);
+
+  .gauge-arc {
+    display: none;
   }
-  
+
   .cta-zone {
     padding: 4rem 1rem;
     min-height: auto;
@@ -681,22 +862,28 @@
 
 /* Unified Reduced Motion Block */
 @media (prefers-reduced-motion: reduce) {
+
   .glitch-text::before,
   .glitch-text::after {
     animation: none;
     display: none;
   }
-  
+
   .scroll-line::after,
   .status-dot,
   .recon-line,
   .recon-cursor {
     animation: none;
   }
-  
+
   .cta-card,
   .cta-card-icon,
   .cta-card-arrow {
     transition: none;
+  }
+
+  .arc-fill.is-pulsing,
+  .arc-redline {
+    animation: none;
   }
 }
