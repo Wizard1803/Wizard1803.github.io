@@ -1,0 +1,230 @@
+<!-- index.html — Home page (hero dashboard) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WIZARD — Red Teamer in Training</title>
+  
+  <!-- Phase 1 Foundation CSS -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/transitions.css">
+  <link rel="stylesheet" href="css/hero.css?v=layout-fix-2">
+
+  <!-- GSAP CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+
+  <!-- Phase 1 Foundation JS -->
+  <script src="js/utils.js" defer></script>
+  <script src="js/content-loader.js" defer></script>
+  <script src="js/cursor.js" defer></script>
+  <script src="js/nav.js" defer></script>
+  <script src="js/command-palette.js" defer></script>
+  <script src="js/hero.js?v=hero-motion-3" defer></script>
+  <script src="js/stats-counter.js" defer></script>
+</head>
+<body>
+  
+  <!-- Global Nav Capsule -->
+  <nav class="nav-capsule glass-panel">
+    <div class="nav-logo">PIYUSH</div>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="projects.html" class="nav-link">Projects</a>
+      <a href="labs.html" class="nav-link">Labs</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </div>
+    <button class="nav-cmd-trigger" aria-label="Open Command Palette">Ctrl K</button>
+  </nav>
+
+  <!-- Content for Hero goes here in Phase 2 -->
+  <main id="swup-root">
+    <section class="hero-section" id="hero-section">
+      <!-- Mousetrail container (replaces canvas) -->
+      <div id="mousetrail-container" class="mousetrail-container"></div>
+      
+      <!-- Telemetry Corners -->
+      <div class="telemetry-corner top-left mono text-muted">
+        <span id="local-time">00:00:00</span>
+      </div>
+      <div class="telemetry-corner top-right">
+        <div class="telemetry-line" id="telemetry-focus"></div>
+      </div>
+
+      <div class="hero-cockpit">
+        <!-- Left Sidebar: Left Arc -->
+        <div class="hero-sidebar left">
+          <div class="gauge-arc" id="arc-left">
+            <svg class="arc-svg" viewBox="0 0 100 400" preserveAspectRatio="none">
+              <!-- Defs for gradients -->
+              <defs>
+                <linearGradient id="left-arc-grad" x1="0" y1="1" x2="0" y2="0">
+                  <stop offset="0%" stop-color="var(--accent-gold, #ffb5a0)" />
+                  <stop offset="70%" stop-color="var(--accent)" />
+                  <stop offset="100%" stop-color="var(--accent2)" />
+                </linearGradient>
+                <clipPath id="left-arc-clip">
+                  <rect class="arc-fill-rect" x="0" y="400" width="100" height="400" />
+                </clipPath>
+              </defs>
+              <!-- Background Path -->
+              <path class="arc-bg" d="M 90,400 L 90,250 L 20,50 L 20,0" fill="none" stroke="var(--dim)" stroke-width="4" />
+              <!-- Fill Path -->
+              <path class="arc-fill" d="M 90,400 L 90,250 L 20,50 L 20,0" fill="none" stroke="url(#left-arc-grad)" stroke-width="4" clip-path="url(#left-arc-clip)" />
+              <!-- Tick Marks -->
+              <g class="arc-ticks">
+                <line x1="20" y1="10" x2="5" y2="10" stroke="var(--accent2)" stroke-width="2" />
+                <line x1="40" y1="107" x2="25" y2="107" stroke="var(--muted)" stroke-width="1" />
+                <line x1="60" y1="164" x2="45" y2="164" stroke="var(--muted)" stroke-width="1" />
+                <line x1="80" y1="221" x2="65" y2="221" stroke="var(--muted)" stroke-width="1" />
+                <line x1="90" y1="380" x2="75" y2="380" stroke="var(--muted)" stroke-width="1" />
+              </g>
+            </svg>
+            <div class="arc-label-container" id="label-left-container">
+              <span class="arc-label mono">RPM</span>
+              <span class="arc-reveal mono text-accent">LOADING…</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Center: Main Focus -->
+        <div class="hero-center" id="heroCenter">
+          <div class="glitch-wrapper">
+            <h1 class="glitch-text" id="hero-name" data-text="LOADING…">LOADING…</h1>
+          </div>
+          
+          <div class="title-scroller">
+            <h2 class="subtitle mono text-accent" id="hero-title">INITIALIZING SYSTEM…</h2>
+          </div>
+          
+          <div class="status-line mono text-muted">
+            <span class="status-dot"></span> <span id="hero-status"></span>
+          </div>
+          
+          <div class="scroll-indicator">
+            <span class="mono text-muted" id="scroll-prompt" style="font-size: 10px;"></span>
+            <div class="scroll-line"></div>
+          </div>
+          
+          <div class="touch-tags-row" id="touch-tags"></div>
+        </div>
+        
+        <!-- Right Sidebar: Right Arc & Recon Panel -->
+        <div class="hero-sidebar right">
+          <div class="gauge-arc" id="arc-right">
+            <svg class="arc-svg" viewBox="0 0 100 400" preserveAspectRatio="none">
+              <!-- Defs for gradients -->
+              <defs>
+                <linearGradient id="right-arc-grad" x1="0" y1="1" x2="0" y2="0">
+                  <stop offset="0%" stop-color="var(--accent-gold, #ffb5a0)" />
+                  <stop offset="70%" stop-color="var(--accent)" />
+                  <stop offset="100%" stop-color="var(--accent2)" />
+                </linearGradient>
+                <clipPath id="right-arc-clip">
+                  <rect class="arc-fill-rect" x="0" y="400" width="100" height="400" />
+                </clipPath>
+              </defs>
+              <!-- Background Path -->
+              <path class="arc-bg" d="M 10,400 L 10,250 L 80,50 L 80,0" fill="none" stroke="var(--dim)" stroke-width="4" />
+              <!-- Fill Path -->
+              <path class="arc-fill" d="M 10,400 L 10,250 L 80,50 L 80,0" fill="none" stroke="url(#right-arc-grad)" stroke-width="4" clip-path="url(#right-arc-clip)" />
+              <!-- Tick Marks -->
+              <g class="arc-ticks">
+                <line x1="80" y1="10" x2="95" y2="10" stroke="var(--accent2)" stroke-width="2" />
+                <line x1="60" y1="107" x2="75" y2="107" stroke="var(--muted)" stroke-width="1" />
+                <line x1="40" y1="164" x2="55" y2="164" stroke="var(--muted)" stroke-width="1" />
+                <line x1="20" y1="221" x2="35" y2="221" stroke="var(--muted)" stroke-width="1" />
+                <line x1="10" y1="380" x2="25" y2="380" stroke="var(--muted)" stroke-width="1" />
+              </g>
+            </svg>
+            <div class="arc-label-container" id="label-right-container">
+              <span class="arc-label mono">KMH</span>
+              <span class="arc-reveal mono text-accent">LOADING…</span>
+            </div>
+          </div>
+          
+          <!-- Recon Output Panel -->
+          <div class="recon-panel glass-panel">
+            <div class="recon-terminal">
+              <div class="recon-content mono text-muted" id="recon-output"></div>
+              <div class="recon-active-line mono text-accent2">
+                &gt; <span id="recon-prompt"></span><span class="recon-cursor"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Counter Strip Below Hero -->
+    <section class="stats-strip-section">
+      <div class="stats-strip" id="stats-container">
+        <!-- Stats will be injected here -->
+      </div>
+    </section>
+
+    <!-- System Ready CTA Zone -->
+    <section class="cta-zone" id="cta-zone">
+      <!-- Ambient glow -->
+      <div class="cta-glow" aria-hidden="true"></div>
+
+      <div class="cta-container">
+        <!-- Eyebrow Tag -->
+        <div class="cta-eyebrow mono" id="cta-eyebrow">
+          <span class="status-dot"></span>
+          SYSTEM ONLINE
+        </div>
+
+        <!-- Headline -->
+        <h2 class="cta-headline" id="cta-heading"></h2>
+
+        <!-- Description -->
+        <p class="cta-description" id="cta-description">
+          All systems nominal. Choose a vector or open the command terminal via <kbd>Ctrl&nbsp;K</kbd>.
+        </p>
+
+        <!-- Navigation Cards Grid -->
+        <div class="cta-grid" id="cta-cards">
+          <!-- Card: About / Dossier -->
+          <a href="about.html" class="cta-card" id="cta-card-about" aria-label="Navigate to About page">
+            <div class="cta-card-inner">
+              <div class="cta-card-icon mono text-accent" aria-hidden="true">01</div>
+              <div class="cta-card-content">
+                <h3 class="cta-card-title mono">DOSSIER</h3>
+                <p class="cta-card-desc">Operator profile, skills, certifications.</p>
+              </div>
+              <div class="cta-card-arrow" aria-hidden="true">→</div>
+            </div>
+          </a>
+
+          <!-- Card: Projects / Missions -->
+          <a href="projects.html" class="cta-card" id="cta-card-projects" aria-label="Navigate to Projects page">
+            <div class="cta-card-inner">
+              <div class="cta-card-icon mono text-accent" aria-hidden="true">02</div>
+              <div class="cta-card-content">
+                <h3 class="cta-card-title mono">MISSIONS</h3>
+                <p class="cta-card-desc">Completed operations and engagements.</p>
+              </div>
+              <div class="cta-card-arrow" aria-hidden="true">→</div>
+            </div>
+          </a>
+
+          <!-- Card: Labs / Garage -->
+          <a href="labs.html" class="cta-card" id="cta-card-labs" aria-label="Navigate to Labs page">
+            <div class="cta-card-inner">
+              <div class="cta-card-icon mono text-accent" aria-hidden="true">03</div>
+              <div class="cta-card-content">
+                <h3 class="cta-card-title mono">GARAGE</h3>
+                <p class="cta-card-desc">Experimental tools and side builds.</p>
+              </div>
+              <div class="cta-card-arrow" aria-hidden="true">→</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>

@@ -1,0 +1,142 @@
+{
+  "identity": {
+    "heroDisplay": "WIZARD",
+    "heroSubtitle": "Piyush Kumawat",
+    "heroTitle": "Red Teamer in Training"
+  },
+
+  "home": {
+    "status": "MODE: RECON",
+    "telemetryFocus": "SYSTEM READY",
+    "scrollPrompt": "SCROLL TO PROCEED",
+    "reconPrompt": "READY",
+    "reconLines": [
+      "RECON MODULE READY",
+      "PASSIVE SIGNAL CHECK",
+      "LAB PROFILE LOADED",
+      "OPERATOR TOOLS STANDBY",
+      "STATUS: LEARNING MODE",
+      "CHANNEL: LOCAL"
+    ],
+    "stats": [
+      { "label": "TRYHACKME RANK", "value": 7, "prefix": "TOP ", "suffix": "%" },
+      { "label": "DAY STREAK", "value": 50, "prefix": "", "suffix": "+" },
+      { "label": "ROOMS COMPLETED", "value": 70, "prefix": "", "suffix": "+" }
+    ],
+    "cta": {
+      "eyebrow": "SYSTEM ONLINE",
+      "heading": "SELECT DESTINATION",
+      "description": "Choose a portfolio area or open the command palette with Ctrl K.",
+      "cards": [
+        { "href": "about.html", "label": "DOSSIER", "description": "Profile, skills, certifications, and education." },
+        { "href": "projects.html", "label": "PROJECTS", "description": "Security tools currently in progress." },
+        { "href": "labs.html", "label": "LABS", "description": "Hands-on TryHackMe and HackTheBox learning." }
+      ]
+    }
+  },
+
+  "bio": "Final-year Computer Science & Engineering student at Parul University, focused on offensive security and penetration testing. I build full-stack applications from the ground up — then apply that knowledge to understand how real systems can be attacked. My approach is hands-on: I read penetration testing research and security blogs, then implement what I learn directly into my own tools. Currently sharpening my fundamentals through HackTheBox and TryHackMe labs, working toward the HTB CPTS certification. I'm driven by the process of taking something apart to understand it completely — then figuring out exactly where it breaks.",
+
+  "education": {
+    "degree": "Bachelor of Technology — Computer Science & Engineering",
+    "university": "Parul University, Vadodara, India",
+    "years": "2023 – 2027"
+  },
+
+  "certifications": {
+    "completed": [
+      { "name": "Oracle Cloud Infrastructure Foundations Associate", "issuer": "Oracle", "date": "2024" },
+      { "name": "Oracle Certified Professional: Java SE 17 Developer", "issuer": "Oracle", "date": "2024" },
+      { "name": "Oracle APEX Cloud Developer Certified Professional", "issuer": "Oracle", "date": "2024" },
+      { "name": "Computer Networks and Internet Protocol", "issuer": "NPTEL — IIT Kharagpur", "date": "Completed" }
+    ],
+    "inProgress": [
+      {
+        "name": "HackTheBox CPTS (Certified Penetration Testing Specialist)",
+        "status": "Learning path — exam not yet purchased",
+        "target": "Ongoing"
+      }
+    ]
+  },
+
+  "projects": [
+    {
+      "name": "Password Analyzer",
+      "status": "in-progress",
+      "description": "CLI tool for deep password strength analysis using mathematical entropy scoring, HaveIBeenPwned API breach lookup (800M+ records), RockYou wordlist matching (14M+ passwords), and mutation detection.",
+      "stack": ["Python", "HaveIBeenPwned API", "RockYou Wordlist"],
+      "github": null,
+      "live": null
+    },
+    {
+      "name": "Port Scanner",
+      "status": "in-progress",
+      "description": "Scans a target IP across a defined port range, identifying open ports and their associated service names. Supports both CLI and web UI modes.",
+      "stack": ["Python"],
+      "github": null,
+      "live": null
+    },
+    {
+      "name": "Recon Toolkit",
+      "status": "in-progress",
+      "description": "Automated reconnaissance toolkit chaining subdomain enumeration, DNS lookups, and service detection into a single workflow. In active development.",
+      "stack": ["Python"],
+      "github": null,
+      "live": null
+    }
+  ],
+
+  "labs": {
+    "htb": {
+      "profile": "https://profile.hackthebox.com/profile/019ef552-003a-723c-8450-4897c503a6af",
+      "handle": "Wizxrd1803",
+      "note": "Currently building HTB skills toward the CPTS certification path.",
+      "toolstack": ["tcpdump", "Netcat", "hashcat", "John", "Wireshark"],
+      "languages": ["Python", "SQL", "Bash"]
+    },
+    "thm": {
+      "profile": "https://tryhackme.com/p/amritkumawat1803",
+      "rank": "Top 7%",
+      "streak": "50+ day streak",
+      "roomsCompleted": "70+",
+      "badges": 10
+    },
+    "statLine": "Top 7% on TryHackMe • 50+ Day Streak • 70+ Rooms Completed"
+  },
+
+  "heroArcs": {
+    "left": {
+      "label": "RPM",
+      "reveal": "TRYHACKME — TOP 7%",
+      "fill": 0.93
+    },
+    "right": {
+      "label": "KMH",
+      "reveal": "CPTS — IN PROGRESS",
+      "fill": 0.5
+    }
+  },
+
+  "skills": [
+    "Python", "JavaScript", "Java", "Bash", "SQL", "Node.js", "Express.js",
+    "React", "MongoDB", "Oracle DB", "EJS", "JWT", "Multer", "Cloudinary",
+    "Tailwind CSS", "Kali Linux", "Linux", "Git", "GitHub", "Cloudflare",
+    "Render", "VS Code", "Vim", "IntelliJ", "tcpdump", "Netcat", "hashcat",
+    "John the Ripper", "Wireshark"
+  ],
+
+  "contact": {
+    "statement": "Learning offensive security by building and breaking things — currently deep in web app and Active Directory attack paths. Open to internships where I can keep learning hands-on.",
+    "links": {
+      "github": "https://github.com/Wizard1803",
+      "linkedin": "https://linkedin.com/in/kumawat-piyush",
+      "email": "amritkumawat1803@gmail.com"
+    },
+    "badge": "RED TEAMER IN TRAINING — OPEN TO 2026 INTERNSHIPS"
+  },
+
+  "assets": {
+    "resume": "assets/resume.pdf",
+    "favicon": "assets/favicon.ico"
+  }
+}

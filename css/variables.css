@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@300;400;500;600&family=Share+Tech+Mono&display=swap');
+
+:root {
+  /* Colors */
+  --bg: #080a0c;
+  --bg2: #0d1117;
+  --dim: #1a1f26;
+  --muted: #3a4250;
+  --text: #c8d0dc;
+  --text-bright: #eef2f7;
+  --accent: #e8ff00;
+  --accent2: #ff4500;
+  
+  /* Typography */
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-mono: 'Share Tech Mono', monospace;
+  --font-body: 'Rajdhani', sans-serif;
+  
+  /* Min font size */
+  --font-size-min: 11px;
+}
+
+/* Glassmorphism utility */
+.glass-panel {
+  background: rgba(13, 17, 23, 0.55);
+  border: 1px solid rgba(232, 255, 0, 0.15);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+

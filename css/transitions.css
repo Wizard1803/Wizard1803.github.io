@@ -1,0 +1,59 @@
+/* transitions.css — View Transition API assignments and keyframes */
+
+/* 
+ * Native cross-document view transitions.
+ * nav-capsule uses 'view-transition-name: nav-capsule' in components.css
+ */
+
+/* Default transition for the root (page content) */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.4s;
+  animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+  animation-fill-mode: both;
+}
+
+::view-transition-old(root) {
+  animation-name: fade-out, drift-up-out;
+}
+
+::view-transition-new(root) {
+  animation-name: fade-in, drift-up-in;
+}
+
+/* Exclude the nav capsule from the root transition */
+::view-transition-old(nav-capsule),
+::view-transition-new(nav-capsule) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+/* Keyframes */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes drift-up-in {
+  from { transform: translateY(15px); }
+  to { transform: translateY(0); }
+}
+
+@keyframes drift-up-out {
+  from { transform: translateY(0); }
+  to { transform: translateY(-15px); }
+}
+
+/* Accessibility: Disable transitions if reduced motion is preferred */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
+  }
+}
+

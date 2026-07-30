@@ -1,0 +1,4 @@
+.env
+.vscode/
+stitch_output/
+.agents/
