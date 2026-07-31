@@ -10,13 +10,17 @@
   <!-- Phase 1 Foundation CSS -->
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/components.css?v=layout-fix-3">
   <link rel="stylesheet" href="css/transitions.css">
-  <link rel="stylesheet" href="css/hero.css?v=layout-fix-2">
+  
+  <link rel="stylesheet" href="css/hero.css?v=magnetic-cta-1">
 
   <!-- GSAP CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+
+  <!-- Vanilla Tilt CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js" defer></script>
 
   <!-- Phase 1 Foundation JS -->
   <script src="js/utils.js" defer></script>
@@ -24,7 +28,9 @@
   <script src="js/cursor.js" defer></script>
   <script src="js/nav.js" defer></script>
   <script src="js/command-palette.js" defer></script>
-  <script src="js/hero.js?v=hero-motion-3" defer></script>
+  <script src="js/navbar.js" defer></script>
+  <script src="js/hero.js?v=hero-motion-4" defer></script>
+  <script src="js/magnetic-physics.js" defer></script>
   <script src="js/stats-counter.js" defer></script>
 </head>
 
@@ -32,15 +38,18 @@
 
   <!-- Global Nav Capsule -->
   <nav class="nav-capsule glass-panel">
-    <div class="nav-logo">PIYUSH</div>
-    <div class="nav-links">
-      <a href="index.html" class="nav-link">Home</a>
-      <a href="about.html" class="nav-link">About</a>
-      <a href="projects.html" class="nav-link">Projects</a>
-      <a href="labs.html" class="nav-link">Labs</a>
-      <a href="contact.html" class="nav-link">Contact</a>
+    <div class="nav-brand" style="display: flex; align-items: center; gap: 0.75rem;">
+      <span class="status-dot"></span>
+      <div class="nav-logo">PIYUSH</div>
     </div>
-    <button class="nav-cmd-trigger" aria-label="Open Command Palette">Ctrl K</button>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link active" data-text="Home"><span class="nav-text">Home</span></a>
+      <a href="about.html" class="nav-link" data-text="About"><span class="nav-text">About</span></a>
+      <a href="projects.html" class="nav-link" data-text="Projects"><span class="nav-text">Projects</span></a>
+      <a href="labs.html" class="nav-link" data-text="Labs"><span class="nav-text">Labs</span></a>
+      <a href="contact.html" class="nav-link" data-text="Contact"><span class="nav-text">Contact</span></a>
+    </div>
+    <button class="nav-cmd-trigger" aria-label="Open Command Palette"><span class="mono" style="font-size: 0.85em; opacity: 0.7;">CTRL</span> K</button>
   </nav>
 
   <!-- Content for Hero goes here in Phase 2 -->
@@ -251,41 +260,59 @@
 
         <!-- Navigation Cards Grid -->
         <div class="cta-grid" id="cta-cards">
-          <!-- Card: About / Dossier -->
-          <a href="about.html" class="cta-card" id="cta-card-about" aria-label="Navigate to About page">
-            <div class="cta-card-inner">
-              <div class="cta-card-icon mono text-accent" aria-hidden="true">01</div>
-              <div class="cta-card-content">
-                <h3 class="cta-card-title mono">DOSSIER</h3>
-                <p class="cta-card-desc">Operator profile, skills, certifications.</p>
+          <!-- Card: Projects / Missions (Spans 2 columns) -->
+          <div class="cta-card-wrapper hero-cta-card" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.2">
+            <a href="projects.html" class="cta-card" id="cta-card-projects" aria-label="Navigate to Projects page">
+              <div class="cta-card-inner">
+                <div class="cta-card-number" aria-hidden="true">01</div>
+                <div class="cta-card-content">
+                  <div class="cta-card-status">
+                    <span class="status-dot"></span>
+                    ACTIVE
+                  </div>
+                  <h3 class="cta-card-title mono">MISSIONS</h3>
+                  <p class="cta-card-desc">Completed operations and engagements.</p>
+                </div>
+                <div class="cta-card-arrow" aria-hidden="true">→</div>
               </div>
-              <div class="cta-card-arrow" aria-hidden="true">→</div>
-            </div>
-          </a>
+            </a>
+          </div>
 
-          <!-- Card: Projects / Missions -->
-          <a href="projects.html" class="cta-card" id="cta-card-projects" aria-label="Navigate to Projects page">
-            <div class="cta-card-inner">
-              <div class="cta-card-icon mono text-accent" aria-hidden="true">02</div>
-              <div class="cta-card-content">
-                <h3 class="cta-card-title mono">MISSIONS</h3>
-                <p class="cta-card-desc">Completed operations and engagements.</p>
+          <!-- Card: About / Dossier (1 column) -->
+          <div class="cta-card-wrapper" data-tilt data-tilt-max="8" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.2">
+            <a href="about.html" class="cta-card" id="cta-card-about" aria-label="Navigate to About page">
+              <div class="cta-card-inner">
+                <div class="cta-card-number" aria-hidden="true">02</div>
+                <div class="cta-card-content">
+                  <div class="cta-card-status">
+                    <span class="status-dot"></span>
+                    VERIFIED
+                  </div>
+                  <h3 class="cta-card-title mono">DOSSIER</h3>
+                  <p class="cta-card-desc">Operator profile, skills, certifications.</p>
+                </div>
+                <div class="cta-card-arrow" aria-hidden="true">→</div>
               </div>
-              <div class="cta-card-arrow" aria-hidden="true">→</div>
-            </div>
-          </a>
+            </a>
+          </div>
 
-          <!-- Card: Labs / Garage -->
-          <a href="labs.html" class="cta-card" id="cta-card-labs" aria-label="Navigate to Labs page">
-            <div class="cta-card-inner">
-              <div class="cta-card-icon mono text-accent" aria-hidden="true">03</div>
-              <div class="cta-card-content">
-                <h3 class="cta-card-title mono">GARAGE</h3>
-                <p class="cta-card-desc">Experimental tools and side builds.</p>
+          <!-- Card: Labs / Garage (1 column) -->
+          <div class="cta-card-wrapper" data-tilt data-tilt-max="8" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.2">
+            <a href="labs.html" class="cta-card" id="cta-card-labs" aria-label="Navigate to Labs page">
+              <div class="cta-card-inner">
+                <div class="cta-card-number" aria-hidden="true">03</div>
+                <div class="cta-card-content">
+                  <div class="cta-card-status">
+                    <span class="status-dot"></span>
+                    EXPERIMENTAL
+                  </div>
+                  <h3 class="cta-card-title mono">GARAGE</h3>
+                  <p class="cta-card-desc">Experimental tools and side builds.</p>
+                </div>
+                <div class="cta-card-arrow" aria-hidden="true">→</div>
               </div>
-              <div class="cta-card-arrow" aria-hidden="true">→</div>
-            </div>
-          </a>
+            </a>
+          </div>
         </div>
       </div>
     </section>

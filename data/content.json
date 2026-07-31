@@ -97,6 +97,7 @@
       }
     ]
   },
+  "projectsIntro": "Built to learn, not to impress — each one exists to help me understand how real attacks actually work. Rough edges, on purpose.",
   "projects": [
     {
       "name": "Password Analyzer",

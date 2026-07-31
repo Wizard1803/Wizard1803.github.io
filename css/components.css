@@ -12,8 +12,66 @@
   padding: 0.75rem 1.5rem;
   border-radius: 100px;
   z-index: 1000;
-  /* View transition tag for persistence */
   view-transition-name: nav-capsule;
+
+  background-color: rgba(10, 14, 20, 0.5);
+  /* More opaque */
+  background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.15),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.4),
+    0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* Dynamic Spotlight Ambient Glow */
+.nav-capsule::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(140px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      rgba(232, 255, 0, 0.08),
+      transparent 100%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: 0;
+}
+
+/* Dynamic Fiber-Optic Border Glow */
+.nav-capsule::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  /* Overlap existing border */
+  border-radius: inherit;
+  padding: 1px;
+  background: radial-gradient(100px circle at var(--mouse-x, 50%) var(--mouse-y, 100%),
+      rgba(232, 255, 0, 0.6),
+      transparent 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: 1;
+}
+
+.nav-capsule:hover::before,
+.nav-capsule:hover::after {
+  opacity: 1;
+}
+
+/* Ensure contents sit above the glows */
+.nav-brand,
+.nav-links,
+.nav-cmd-trigger {
+  position: relative;
+  z-index: 2;
 }
 
 .nav-logo {
@@ -22,9 +80,34 @@
   color: var(--text-bright);
 }
 
+.status-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+  animation: pulse-dot 2s ease-in-out infinite;
+  display: inline-block;
+}
+
+@keyframes pulse-dot {
+
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 4px var(--accent);
+  }
+
+  50% {
+    opacity: 0.3;
+    box-shadow: 0 0 0 transparent;
+  }
+}
+
 .nav-links {
   display: flex;
   gap: 1rem;
+  position: relative;
+  /* For absolute positioning of the active indicator */
 }
 
 .nav-link {
@@ -32,12 +115,23 @@
   font-size: var(--font-size-min);
   text-transform: uppercase;
   color: var(--text);
-  padding: 0.5rem;
+  padding: 0.5rem 0.75rem;
   transition: color 0.3s cubic-bezier(0.32, 0.72, 0, 1), transform 0.15s ease;
+  position: relative;
+}
+
+.nav-link.active .nav-link-index,
+.nav-link:hover .nav-link-index {
+  color: var(--accent);
+}
+
+.nav-link.active .nav-text,
+.nav-link:hover .nav-text {
+  color: var(--text-bright);
 }
 
 .nav-link.active {
-  color: var(--accent);
+  text-shadow: 0 0 10px rgba(232, 255, 0, 0.3);
 }
 
 .nav-link:active {
@@ -45,18 +139,26 @@
 }
 
 .nav-cmd-trigger {
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
   font-size: var(--font-size-min);
-  border: 1px solid var(--accent);
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  color: var(--text);
-  transition: border-color 0.3s cubic-bezier(0.32, 0.72, 0, 1), color 0.3s cubic-bezier(0.32, 0.72, 0, 1), transform 0.15s ease;
+  background: rgba(232, 255, 0, 0.03);
+  border: 1px solid rgba(232, 255, 0, 0.15);
+  padding: 0.5rem 0.85rem;
+  border-radius: 6px;
+  color: var(--text-bright);
+  transition: all 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
 }
 
 .nav-cmd-trigger:hover {
-  border-color: var(--accent);
+  border-color: rgba(232, 255, 0, 0.4);
+  background: rgba(232, 255, 0, 0.08);
   color: var(--accent);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1), 0 0 12px rgba(232, 255, 0, 0.15);
 }
 
 .nav-cmd-trigger:active {
@@ -211,6 +313,7 @@
 
 /* Cursor System */
 @media (pointer: fine) {
+
   body.custom-cursor,
   body.custom-cursor *:not(input):not(textarea) {
     cursor: none !important;
@@ -275,4 +378,55 @@
   .cursor-brackets {
     transition: none !important;
   }
+}
+
+/* Anti-FOUC for GSAP High-End Entrance Animations */
+@media (prefers-reduced-motion: no-preference) {
+
+  .about-bio-section,
+  .about-skills-section,
+  .about-tags-section,
+  .about-certs-section,
+  .about-education-section,
+  .tag-pill,
+  .cert-card-wrapper,
+  .projects-header,
+  .project-card-wrapper,
+  .labs-stat-item,
+  .platform-card-wrapper,
+  .labs-writeups-section,
+  .contact-badge,
+  .contact-statement,
+  .channel-row,
+  #cta-eyebrow,
+  #cta-heading,
+  #cta-description,
+  .cta-card-wrapper,
+  .page-header {
+    visibility: hidden;
+    opacity: 0;
+  }
+}
+
+
+/* Eyebrow Tags (High-End Scale) */
+.eyebrow {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--accent);
+  padding: 0.35rem 0.85rem;
+  border: 1px solid rgba(232, 255, 0, 0.2);
+  border-radius: 100px;
+  background: rgba(232, 255, 0, 0.05);
+  margin-bottom: 0.5rem;
+}
+
+.header-title-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }

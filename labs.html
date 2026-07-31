@@ -5,7 +5,84 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Labs — WIZARD</title>
+  <meta name="description" content="HackTheBox and TryHackMe activity — CTF stats, lab completions, and security toolstack.">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/transitions.css">
+  
+  <link rel="stylesheet" href="css/pages/labs.css">
+
+  <!-- GSAP CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js" defer></script>
+  <!-- JS -->
+  <script src="js/utils.js" defer></script>
+  <script src="js/content-loader.js" defer></script>
+  <script src="js/cursor.js" defer></script>
+  <script src="js/nav.js" defer></script>
+  <script src="js/command-palette.js" defer></script>
+  <script src="js/navbar.js" defer></script>
+  <script src="js/labs.js" defer></script>
+  <script src="js/magnetic-physics.js" defer></script>
 </head>
 <body>
+  <!-- Global Nav Capsule -->
+  <nav class="nav-capsule glass-panel">
+    <div class="nav-brand" style="display: flex; align-items: center; gap: 0.75rem;">
+      <span class="status-dot"></span>
+      <div class="nav-logo">PIYUSH</div>
+    </div>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link" data-text="Home"><span class="nav-text">Home</span></a>
+      <a href="about.html" class="nav-link" data-text="About"><span class="nav-text">About</span></a>
+      <a href="projects.html" class="nav-link" data-text="Projects"><span class="nav-text">Projects</span></a>
+      <a href="labs.html" class="nav-link active" data-text="Labs"><span class="nav-text">Labs</span></a>
+      <a href="contact.html" class="nav-link" data-text="Contact"><span class="nav-text">Contact</span></a>
+    </div>
+    <button class="nav-cmd-trigger" aria-label="Open Command Palette"><span class="mono" style="font-size: 0.85em; opacity: 0.7;">CTRL</span> K</button>
+  </nav>
+
+  <main id="swup-root">
+    <section class="labs-page">
+      <div class="labs-container">
+
+        <!-- Header -->
+        <div class="labs-header">
+          <h1>Labs</h1>
+          <span class="header-rule"></span>
+        </div>
+
+        <!-- Stat line — 3 stats side by side -->
+        <div class="labs-stat-line" id="labs-stat-line">
+          <!-- Rendered dynamically by labs.js -->
+        </div>
+
+        <!-- Platform Cards -->
+        <div class="labs-platforms" id="labs-platforms">
+          <!-- Rendered dynamically by labs.js -->
+        </div>
+
+        <!-- Writeups — Coming Soon placeholder -->
+        <div class="labs-writeups-section">
+          <div class="section-header">
+            <h2>Writeups</h2>
+            <span class="header-rule"></span>
+          </div>
+          <div class="writeups-placeholder">
+            <span class="writeups-placeholder-text">
+              AWAITING INPUT<span class="writeups-cursor"></span>
+            </span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
 </body>
 </html>

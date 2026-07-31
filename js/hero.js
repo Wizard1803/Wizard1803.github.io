@@ -179,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
         onEnter: () => {
           window.startStatsCounter?.();
           if (!isReduced) {
-            gsap.fromTo('.stat-block', 
+            gsap.fromTo('.stat-block',
               { autoAlpha: 0, y: 20 },
               { autoAlpha: 1, y: 0, duration: 1, stagger: 0.1, ease: 'power3.out' }
             );
@@ -193,13 +193,13 @@ document.addEventListener('DOMContentLoaded', () => {
           start: 'top 75%',
           once: true,
           onEnter: () => {
-            gsap.fromTo(['#cta-eyebrow', '#cta-heading', '#cta-description'], 
-              { autoAlpha: 0, y: 20 },
-              { autoAlpha: 1, y: 0, duration: 1, stagger: 0.1, ease: 'power3.out' }
+            gsap.fromTo(['#cta-eyebrow', '#cta-heading', '#cta-description'],
+              { autoAlpha: 0, y: 30, filter: 'blur(8px)' },
+              { autoAlpha: 1, y: 0, filter: 'blur(0px)', duration: 1.2, stagger: 0.1, ease: 'expo.out' }
             );
-            gsap.fromTo('.cta-card', 
-              { autoAlpha: 0, y: 30 },
-              { autoAlpha: 1, y: 0, duration: 1, stagger: 0.1, ease: 'power3.out', delay: 0.2 }
+            gsap.fromTo('.cta-card-wrapper',
+              { autoAlpha: 0, y: 40, filter: 'blur(8px)', rotationX: -5 },
+              { autoAlpha: 1, y: 0, filter: 'blur(0px)', rotationX: 0, duration: 1.4, stagger: 0.15, ease: 'expo.out', delay: 0.2, transformPerspective: 1000 }
             );
           }
         });
@@ -222,15 +222,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const timeline = gsap.timeline();
     timeline
-      .to('.hero-sidebar', { opacity: 1, duration: 0.25 }, 0)
-      .to('#arc-left .arc-fill-rect', { attr: { y: 400 * (1 - arcFills.left) }, duration: 1.2, ease: 'power3.out' }, 0)
-      .to('#arc-right .arc-fill-rect', { attr: { y: 400 * (1 - arcFills.right) }, duration: 1.2, ease: 'power3.out' }, 0)
+      .to('.hero-sidebar', { opacity: 1, duration: 0.4 }, 0)
+      .to('#arc-left .arc-fill-rect', { attr: { y: 400 * (1 - arcFills.left) }, duration: 1.6, ease: 'expo.out' }, 0)
+      .to('#arc-right .arc-fill-rect', { attr: { y: 400 * (1 - arcFills.right) }, duration: 1.6, ease: 'expo.out' }, 0)
       .to('.telemetry-corner', { opacity: 0.6, duration: 1.4 }, 0)
-      .to('.glitch-wrapper', { opacity: 1, duration: 0.18, ease: 'power2.out' }, 0.8)
-      .to('.title-scroller, .status-line', { opacity: 1, duration: 0.4, stagger: 0.05 }, 1.6)
-      .to('.recon-panel', { opacity: 1, duration: 0.25 }, 2.0)
-      .call(() => initRecon(reconLines, false), [], 2.0)
-      .to('.scroll-indicator', { opacity: 1, duration: 0.4 }, 2.0)
+      .fromTo('.glitch-wrapper', { filter: 'blur(10px)', scale: 1.05 }, { opacity: 1, filter: 'blur(0px)', scale: 1, duration: 1.2, ease: 'expo.out' }, 0.4)
+      .to('.title-scroller, .status-line', { opacity: 1, duration: 0.8, stagger: 0.1 }, 1.2)
+      .to('.recon-panel', { opacity: 1, duration: 0.6 }, 1.6)
+      .call(() => initRecon(reconLines, false), [], 1.6)
+      .to('.scroll-indicator', { opacity: 1, duration: 0.8 }, 2.0)
       .call(() => {
         document.querySelectorAll('.arc-fill').forEach(el => el.classList.add('is-pulsing'));
       }, [], 2.4);
@@ -246,25 +246,49 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!cards || !Array.isArray(cta.cards)) return;
     cards.replaceChildren();
     cta.cards.forEach((card, index) => {
-      const link = document.createElement('a');
-      link.href = card.href;
-      link.className = 'cta-card';
-      link.setAttribute('aria-label', card.label);
-      link.innerHTML = `
-        <span class="cta-card-inner">
-          <span class="cta-card-icon mono text-accent">
-            ${String(index + 1).padStart(2, '0')}
-          </span>
-          <span class="cta-card-content">
-            <span class="cta-card-title mono"></span>
-            <span class="cta-card-desc"></span>
-          </span>
-          <span class="cta-card-arrow" aria-hidden="true">→</span>
-        </span>
+      const numStr = String(index + 1).padStart(2, '0');
+      let statusText = "ONLINE";
+      if (index === 0) statusText = "ACTIVE";
+      if (index === 1) statusText = "VERIFIED";
+      if (index === 2) statusText = "EXPERIMENTAL";
+
+      const wrapper = document.createElement('div');
+      wrapper.className = index === 0 ? 'cta-card-wrapper hero-cta-card' : 'cta-card-wrapper';
+      wrapper.setAttribute('data-tilt', '');
+      wrapper.setAttribute('data-tilt-max', index === 0 ? '5' : '8');
+      wrapper.setAttribute('data-tilt-speed', '400');
+      wrapper.setAttribute('data-tilt-glare', '');
+      wrapper.setAttribute('data-tilt-max-glare', '0.2');
+
+      wrapper.innerHTML = `
+        <a href="${card.href}" class="cta-card" aria-label="${card.label}">
+          <div class="cta-card-inner">
+            <div class="cta-card-number" aria-hidden="true">${numStr}</div>
+            <div class="cta-card-content">
+              <div class="cta-card-status">
+                <span class="status-dot"></span>
+                ${statusText}
+              </div>
+              <h3 class="cta-card-title mono"></h3>
+              <p class="cta-card-desc"></p>
+            </div>
+            <div class="cta-card-arrow" aria-hidden="true">→</div>
+          </div>
+        </a>
       `;
-      link.querySelector('.cta-card-title').textContent = card.label;
-      link.querySelector('.cta-card-desc').textContent = card.description;
-      cards.appendChild(link);
+      wrapper.querySelector('.cta-card-title').textContent = card.label;
+      wrapper.querySelector('.cta-card-desc').textContent = card.description;
+      cards.appendChild(wrapper);
+
+      // Initialize tilt for the new wrapper
+      if (window.VanillaTilt) {
+        // VanillaTilt.init(wrapper);
+      }
     });
+
+    // Initialize Magnetic Physics for dynamically rendered cards
+    if (typeof window.initMagneticPhysics === 'function') {
+      window.initMagneticPhysics();
+    }
   }
 });

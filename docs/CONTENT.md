@@ -72,6 +72,12 @@ BSCP intentionally excluded — no exam purchased, only CPTS tracked publicly ri
 
 ## 5. Projects
 
+**Projects Intro Text:**
+```
+Built to learn, not to impress — each one exists to help me understand
+how real attacks actually work. Rough edges, on purpose.
+```
+
 **Approach:** No project is presented as a finished, polished case study. All three are shown as work-in-progress with a clear in-progress label — honest framing over inflated claims.
 
 ### 1. Password Analyzer *(in progress)*

@@ -49,13 +49,19 @@ This plan follows the rigid phase structure outlined in `ANTIGRAVITY_PROMPT.md` 
 
 ---
 
-### Phase 3 — Remaining Pages
-*Can be parallelized once Phase 2 is approved.*
-- [ ] **About Page:** `about.html`, `css/pages/about.css`, `js/skill-bars.js` (blueprint motif, bio, redline skill bars, certs). Use the matching prompt from `STITCH_PROMPTS.md` for base layout generation.
-- [ ] **Projects Page:** `projects.html`, `css/pages/projects.css`, `js/hover-cards.js` (workbench motif, project grid, hover previews). Use the matching prompt from `STITCH_PROMPTS.md` for base layout generation.
-- [ ] **Labs Page:** `labs.html`, `css/pages/labs.css` (CRT scanline motif, HTB/THM stats). Use the matching prompt from `STITCH_PROMPTS.md` for base layout generation.
-- [ ] **Contact Page:** `contact.html`, `css/pages/contact.css`, `js/contact.js` (calm motif, clipboard copy, availability badge). Use the matching prompt from `STITCH_PROMPTS.md` for base layout generation.
-- [ ] Update `CONTEXT.md` continuously.
+### Phase 3A — Heavy Pages (About & Projects)
+*Tackling the most complex remaining logic and layouts first.*
+- [x] **About Page:** `about.html`, `css/pages/about.css`, `js/skill-bars.js` (blueprint motif, bio, redline skill bars, certs). Use the matching prompt from `STITCH_PROMPTS.md` for base layout generation.
+- [x] **Projects Page:** `projects.html`, `css/pages/projects.css`, `js/hover-cards.js` (workbench motif, project grid, hover previews). Use the matching prompt from `STITCH_PROMPTS.md` for base layout generation.
+- [x] Update `CONTEXT.md` continuously.
+
+---
+
+### Phase 3B — Light Pages (Labs & Contact)
+*Completing the static and minimalist pages.*
+- [x] **Labs Page:** `labs.html`, `css/pages/labs.css`, `js/labs.js` (CRT scanline motif, HTB/THM stats). Use the matching prompt from `STITCH_PROMPTS.md` for base layout generation.
+- [x] **Contact Page:** `contact.html`, `css/pages/contact.css`, `js/contact.js` (calm motif, clipboard copy, availability badge). Use the matching prompt from `STITCH_PROMPTS.md` for base layout generation.
+- [x] Update `CONTEXT.md` continuously.
 
 ---
 

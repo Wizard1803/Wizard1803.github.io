@@ -1,11 +1,78 @@
 <!-- projects.html — Projects page -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Projects — WIZARD</title>
+  <meta name="description"
+    content="Security tools and projects built by Piyush Kumawat — password analyzer, port scanner, recon toolkit.">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/transitions.css">
+
+  <link rel="stylesheet" href="css/pages/projects.css">
+
+  <!-- GSAP CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js" defer></script>
+  <!-- JS -->
+  <script src="js/utils.js" defer></script>
+  <script src="js/content-loader.js" defer></script>
+  <script src="js/cursor.js" defer></script>
+  <script src="js/nav.js" defer></script>
+  <script src="js/command-palette.js" defer></script>
+  <script src="js/navbar.js" defer></script>
+  <script src="js/hover-cards.js" defer></script>
+  <script src="js/magnetic-physics.js" defer></script>
 </head>
+
 <body>
+  <!-- Global Nav Capsule -->
+  <nav class="nav-capsule glass-panel">
+    <div class="nav-brand" style="display: flex; align-items: center; gap: 0.75rem;">
+      <span class="status-dot"></span>
+      <div class="nav-logo">PIYUSH</div>
+    </div>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link" data-text="Home"><span class="nav-text">Home</span></a>
+      <a href="about.html" class="nav-link" data-text="About"><span class="nav-text">About</span></a>
+      <a href="projects.html" class="nav-link active" data-text="Projects"><span class="nav-text">Projects</span></a>
+      <a href="labs.html" class="nav-link" data-text="Labs"><span class="nav-text">Labs</span></a>
+      <a href="contact.html" class="nav-link" data-text="Contact"><span class="nav-text">Contact</span></a>
+    </div>
+    <button class="nav-cmd-trigger" aria-label="Open Command Palette"><span class="mono" style="font-size: 0.85em; opacity: 0.7;">CTRL</span> K</button>
+  </nav>
+
+  <main id="swup-root">
+    <section class="projects-page">
+      <div class="projects-container">
+
+        <!-- Header -->
+        <div class="projects-header">
+          <div class="header-title-group">
+            <span class="eyebrow">[ PROJECT MATRIX ]</span>
+            <h1>Projects</h1>
+          </div>
+          <span class="header-rule"></span>
+        </div>
+
+        <p class="projects-intro" data-content="projectsIntro"></p>
+
+        <!-- Project Grid — rendered dynamically by hover-cards.js -->
+        <div class="project-grid" id="project-grid">
+        </div>
+
+      </div>
+    </section>
+  </main>
 </body>
+
 </html>

@@ -1,1 +1,232 @@
-/* contact.css — Contact page specific styles */
+/* contact.css — Contact page: calm, minimal motif */
+
+/* Minimal background — faintest speed lines only */
+.contact-page {
+  position: relative;
+  min-height: 100vh;
+  padding: 12rem 2rem 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-page::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    /* Very faint diagonal speed lines */
+    repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 200px,
+      rgba(200, 208, 220, 0.008) 200px,
+      rgba(200, 208, 220, 0.008) 201px
+    );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.contact-page > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Container — narrow and centered */
+.contact-container {
+  max-width: 680px;
+  width: 100%;
+}
+
+/* ---- AVAILABILITY BADGE ---- */
+.contact-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-min);
+  letter-spacing: 0.15em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 2.5rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid rgba(232, 255, 0, 0.15);
+  border-radius: 100px;
+  background: rgba(13, 17, 23, 0.3);
+}
+
+.contact-badge-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+  animation: pulse-badge 2s ease-in-out infinite;
+}
+
+@keyframes pulse-badge {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+/* ---- STATEMENT ---- */
+.contact-statement {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: clamp(1.15rem, 2.5vw, 1.5rem);
+  line-height: 1.75;
+  color: var(--text-bright);
+  margin-bottom: 3.5rem;
+  max-width: 60ch;
+}
+
+/* ---- CONTACT BENTO GRID ---- */
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+@media (max-width: 767px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.contact-card-wrapper {
+  position: relative;
+  padding: 0.35rem; /* Outer tray padding */
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 1.5rem;
+  background: rgba(255, 255, 255, 0.02);
+  transition: border-color 0.4s ease;
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+
+.contact-card-wrapper:hover {
+  border-color: rgba(232, 255, 0, 0.25);
+}
+
+.contact-card {
+  padding: 2rem;
+  border-radius: 1.15rem; /* Concentric inner radius */
+  background-color: rgba(10, 14, 20, 0.95);
+  background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, transparent 100%);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.15),
+              inset 0 -1px 1px rgba(0, 0, 0, 0.4);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: background-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.contact-card-wrapper:hover .contact-card {
+  /* Ambient gradient hover effect */
+  background-color: rgba(18, 22, 28, 0.95);
+  box-shadow: inset 0 1px 1px rgba(232, 255, 0, 0.2),
+              inset 0 -1px 1px rgba(0, 0, 0, 0.4);
+}
+
+.col-span-2 {
+  grid-column: span 2;
+}
+
+@media (max-width: 767px) {
+  .col-span-2 {
+    grid-column: span 1;
+  }
+}
+
+.channel-label {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  color: var(--muted);
+  transform: translateZ(20px);
+}
+
+.channel-value {
+  font-weight: 300;
+  font-size: 0.9rem;
+  color: var(--text);
+  margin-left: 1rem;
+}
+
+.channel-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.channel-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  font-size: 0.9rem;
+  color: var(--muted);
+  transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1), background 0.3s ease, color 0.3s ease;
+}
+
+/* ---- TOAST NOTIFICATION ---- */
+.toast {
+  position: fixed;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  color: var(--bg);
+  background: var(--accent);
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 3000;
+}
+
+.toast.active {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 768px) {
+  .contact-page {
+    padding: 7rem 1.25rem 3rem;
+    align-items: flex-start;
+    padding-top: 8rem;
+  }
+
+  .channel-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding: 1.25rem 1rem;
+  }
+
+  .channel-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .channel-value {
+    margin-left: 0;
+  }
+}
+
+/* ---- REDUCED MOTION ---- */
+@media (prefers-reduced-motion: reduce) {
+  .contact-badge-dot {
+    animation: none;
+    opacity: 1;
+  }
+
+  .toast {
+    transition: none;
+  }
+}

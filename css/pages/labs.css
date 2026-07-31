@@ -1,1 +1,304 @@
-/* labs.css — Labs page specific styles */
+/* labs.css — Labs page: CRT terminal motif */
+
+/* CRT scanline + vignette motif */
+.labs-page {
+  position: relative;
+  min-height: 100vh;
+  padding: 12rem 2rem 4rem;
+}
+
+/* Scanlines overlay */
+.labs-page::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(200, 208, 220, 0.015) 2px,
+    rgba(200, 208, 220, 0.015) 4px
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Vignette overlay */
+.labs-page::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 50%,
+    rgba(8, 10, 12, 0.6) 100%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.labs-page > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Container */
+.labs-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* Page header */
+.labs-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 3.5rem;
+}
+
+.labs-header h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  color: var(--text-bright);
+  white-space: nowrap;
+  margin-bottom: 0;
+}
+
+.labs-header .header-rule {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--dim), transparent);
+}
+
+/* ---- STAT LINE ---- */
+.labs-stat-line {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-bottom: 4rem;
+  text-align: center;
+}
+
+.labs-stat-item {
+  padding: 1.5rem;
+  border: 1px solid var(--dim);
+  border-radius: 4px;
+  background: rgba(13, 17, 23, 0.3);
+}
+
+.labs-stat-value {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.labs-stat-label {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-min);
+  letter-spacing: 0.2em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+/* ---- PLATFORM SECTIONS ---- */
+.labs-platforms {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+.platform-card-wrapper {
+  position: relative;
+  padding: 0.35rem; /* Outer tray padding */
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 1.5rem;
+  background: rgba(255, 255, 255, 0.02);
+  transform-style: preserve-3d;
+  cursor: pointer;
+  transition: border-color 0.4s ease;
+}
+
+.platform-card-wrapper:hover {
+  border-color: rgba(232, 255, 0, 0.25);
+}
+
+.platform-card {
+  position: relative;
+  padding: 2.5rem;
+  border-radius: 1.15rem; /* Concentric inner radius */
+  background-color: rgba(10, 14, 20, 0.95);
+  background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, transparent 100%);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.15),
+              inset 0 -1px 1px rgba(0, 0, 0, 0.4);
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: background-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.platform-card-wrapper:hover .platform-card {
+  /* Ambient gradient hover effect */
+  background-color: rgba(18, 22, 28, 0.95);
+  box-shadow: inset 0 1px 1px rgba(232, 255, 0, 0.2),
+              inset 0 -1px 1px rgba(0, 0, 0, 0.4);
+}
+
+.platform-name {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  color: var(--text-bright);
+  margin-bottom: 1rem;
+  transform: translateZ(35px);
+}
+
+.platform-handle {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+  margin-bottom: 0.75rem;
+  transform: translateZ(25px);
+}
+
+.platform-note {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--text);
+  margin-bottom: 1.25rem;
+}
+
+.platform-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-min);
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  text-transform: uppercase;
+  transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1), opacity 0.3s ease;
+}
+
+.platform-link:active {
+  transform: scale(0.96);
+}
+
+.platform-link:hover {
+  opacity: 0.9;
+}
+
+.platform-link-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(232, 255, 0, 0.1);
+  transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1), background 0.3s ease;
+}
+
+@media (hover: hover) {
+  .platform-card-wrapper:hover .platform-link-arrow {
+    transform: translate(4px, -4px) scale(1.1);
+    background: rgba(232, 255, 0, 0.2);
+  }
+}
+
+/* Tool stack pills within platform card */
+.platform-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+/* ---- WRITEUPS SECTION (Coming Soon) ---- */
+.labs-writeups-section {
+  margin-bottom: 4rem;
+}
+
+.labs-writeups-section .section-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.labs-writeups-section .section-header h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  color: var(--text-bright);
+  white-space: nowrap;
+  margin-bottom: 0;
+}
+
+.labs-writeups-section .section-header .header-rule {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--dim), transparent);
+}
+
+.writeups-placeholder {
+  padding: 3rem 2rem;
+  border: 1px dashed var(--dim);
+  border-radius: 4px;
+  text-align: center;
+}
+
+.writeups-placeholder-text {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--muted);
+  letter-spacing: 0.15em;
+}
+
+.writeups-cursor {
+  display: inline-block;
+  width: 8px;
+  height: 1.1em;
+  background: var(--accent);
+  margin-left: 4px;
+  vertical-align: text-bottom;
+  animation: blink-cursor 1s step-end infinite;
+}
+
+@keyframes blink-cursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 768px) {
+  .labs-page {
+    padding: 7rem 1.25rem 3rem;
+  }
+
+  .labs-stat-line {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .labs-platforms {
+    grid-template-columns: 1fr;
+  }
+
+  .labs-header {
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+}
+
+/* ---- REDUCED MOTION ---- */
+@media (prefers-reduced-motion: reduce) {
+  .writeups-cursor {
+    animation: none;
+    opacity: 1;
+  }
+}
