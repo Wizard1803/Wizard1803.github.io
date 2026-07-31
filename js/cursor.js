@@ -19,13 +19,24 @@ document.addEventListener('DOMContentLoaded', () => {
   // Enable custom cursor styles
   document.body.classList.add('custom-cursor');
 
-  let mouseX = 0;
-  let mouseY = 0;
+  let mouseX = parseFloat(sessionStorage.getItem('cursorX')) || window.innerWidth / 2;
+  let mouseY = parseFloat(sessionStorage.getItem('cursorY')) || window.innerHeight / 2;
   let isHovering = false;
 
+  // Initialize immediately if we have a saved position
+  if (sessionStorage.getItem('cursorX')) {
+    dot.style.opacity = '1';
+    dot.style.transform = `translate(calc(${mouseX}px - 50%), calc(${mouseY}px - 50%))`;
+    brackets.style.transform = `translate(calc(${mouseX}px - 50%), calc(${mouseY}px - 50%))`;
+  }
+
   const updateCursor = (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
+    if (e) {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      sessionStorage.setItem('cursorX', mouseX);
+      sessionStorage.setItem('cursorY', mouseY);
+    }
 
     // Check if the cursor is hidden by another script (like hero.js)
     if (document.body.classList.contains('hide-custom-cursor')) {

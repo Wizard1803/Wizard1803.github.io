@@ -315,7 +315,12 @@
 @media (pointer: fine) {
 
   body.custom-cursor,
-  body.custom-cursor *:not(input):not(textarea) {
+  body.custom-cursor *:not(input):not(textarea),
+  ::view-transition,
+  ::view-transition-group(*),
+  ::view-transition-image-pair(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
     cursor: none !important;
   }
 

@@ -65,16 +65,16 @@ This plan follows the rigid phase structure outlined in `ANTIGRAVITY_PROMPT.md` 
 
 ---
 
-### Phase 4 — Integration & Debugging
-- [ ] **Functional Audit:** Test command palette, mousetrail, hover-cards, cursor, chevron reveals, and clipboard copy.
-- [ ] **Accessibility Audit:** Verify `prefers-reduced-motion` site-wide, touch targets (44x44px min), contrast floors, and touch fallbacks for hover interactions.
-- [ ] **Visual Audit:** Ensure cross-page consistency (accent colors, fonts, glass specs).
-- [ ] **Deployment Audit:** Ensure everything runs via a simple local static server without any build steps or broken relative links.
+### Phase 4 — Integration & Debugging ✅
+- [x] **Functional Audit:** Test command palette, mousetrail, hover-cards, cursor, chevron reveals, and clipboard copy.
+- [x] **Accessibility Audit:** Verify `prefers-reduced-motion` site-wide, touch targets (44x44px min), contrast floors, and touch fallbacks for hover interactions.
+- [x] **Visual Audit:** Ensure cross-page consistency (accent colors, fonts, glass specs).
+- [x] **Deployment Audit:** Ensure everything runs via a simple local static server without any build steps or broken relative links.
 
 ---
 
-### Phase 5 — Final Report
-- [ ] Provide a summary of the completed site, flag any remaining gaps (e.g., pending PDF/favicon or missing GitHub project links), and confirm readiness for a GitHub Pages push.
+### Phase 5 — Final Report ✅
+- [x] Provide a summary of the completed site, flag any remaining gaps (e.g., pending PDF/favicon or missing GitHub project links), and confirm readiness for a GitHub Pages push.
 
 ## Verification Plan
 
