@@ -1,7 +1,0 @@
-- `[x]` Phase 1 - Foundation
-- `[x]` Phase 2 - Home Hero
-  - `[x]` **HTML Structure:** Update `index.html` with the three-column cockpit dashboard layout (stats sidebar, center cockpit, right objective).
-  - `[x]` **CSS Styling:** Build `css/hero.css` focusing on grid layout, angular chevrons, cinematic lighting, and glitch keyframes.
-  - `[x]` **Data Binding & Stats:** Build `js/stats-counter.js` to populate data from `window.siteContentPromise` and animate number counters.
-  - `[x]` **GSAP Animations & Mouse Trail:** Build `js/hero.js` to handle chevron GSAP sweeps, ScrollTrigger fade/scale on scroll, glitch text initialization, and the interactive canvas mousetrail.
-  - `[x]` Update `CONTEXT.md` with Phase 2 completion.
