@@ -100,7 +100,7 @@
   "projectsIntro": "Built to learn, not to impress — each one exists to help me understand how real attacks actually work. Rough edges, on purpose.",
   "projects": [
     {
-      "name": "Password Analyzer",
+      "name": "Hashtrace",
       "status": "in-progress",
       "description": "CLI tool for deep password strength analysis using mathematical entropy scoring, HaveIBeenPwned API breach lookup (800M+ records), RockYou wordlist matching (14M+ passwords), and mutation detection.",
       "stack": [
@@ -108,7 +108,7 @@
         "HaveIBeenPwned API",
         "RockYou Wordlist"
       ],
-      "github": null,
+      "github": "https://github.com/Wizard1803/Hashtrace",
       "live": null
     },
     {
@@ -118,7 +118,7 @@
       "stack": [
         "Python"
       ],
-      "github": null,
+      "github": "https://github.com/Wizard1803/Port-Scanner",
       "live": null
     },
     {
