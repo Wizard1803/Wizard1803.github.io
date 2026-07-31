@@ -371,7 +371,7 @@
 .glitch-text {
   display: inline-block;
   font-family: var(--font-display);
-  font-size: clamp(4rem, 10vw, 8rem);
+  font-size: clamp(3rem, 12vw, 8rem);
   color: var(--text-bright);
   letter-spacing: 0.05em;
   position: relative;
@@ -900,22 +900,90 @@
 /* ==========================================================================
    MEDIA QUERIES
    ========================================================================== */
+/* Tablet (1024px) */
 @media (max-width: 1024px) {
   .hero-cockpit {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr auto;
-    padding-top: 6rem;
-  }
-
-  .hero-sidebar {
-    align-items: center !important;
-    text-align: center;
+    grid-template-columns: 180px 1fr 180px;
+    gap: 1rem;
+    padding: 6rem 1rem 2rem 1rem;
   }
 
   .gauge-arc {
-    display: none;
+    width: 140px;
   }
 
+  .hero-sidebar {
+    text-align: center;
+  }
+}
+
+/* Mobile (768px) */
+@media (max-width: 768px) {
+  .hero-section {
+    min-height: 100dvh;
+    height: auto;
+  }
+
+  .hero-cockpit {
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh;
+    padding-top: 8rem;
+    padding-bottom: 4rem;
+    gap: 2rem;
+  }
+
+  .hero-center {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .hero-sidebar.left {
+    display: none; /* Hide left gauge on mobile */
+  }
+
+  .hero-sidebar.right {
+    width: 100%;
+    margin-top: auto; /* Push to bottom */
+  }
+
+  .gauge-arc {
+    display: none; /* Hide all gauge arcs on mobile to save space */
+  }
+
+  .telemetry-corner {
+    display: none; /* Hide telemetry corners */
+  }
+
+  .recon-panel {
+    width: 100%;
+    height: auto;
+    min-height: 150px;
+  }
+
+  .stats-strip {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    padding: 2rem 1rem;
+  }
+}
+
+/* Mobile Small (480px) */
+@media (max-width: 480px) {
+  .stats-strip {
+    grid-template-columns: 1fr;
+  }
+  
+  .recon-panel {
+    font-size: 10px;
+  }
+}
+
+/* CTA Mobile Responsive (moved from tablet to mobile breakpoint) */
+@media (max-width: 768px) {
   .cta-zone {
     padding: 4rem 1rem;
     min-height: auto;

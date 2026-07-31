@@ -197,9 +197,12 @@
 /* ---- RESPONSIVE ---- */
 @media (max-width: 768px) {
   .contact-page {
-    padding: 7rem 1.25rem 3rem;
+    padding: 8rem var(--container-px) 3rem;
     align-items: flex-start;
-    padding-top: 8rem;
+  }
+  
+  .contact-card {
+    padding: 1.5rem;
   }
 
   .channel-row {

@@ -98,11 +98,21 @@
 }
 
 @media (max-width: 767px) {
+  .projects-page {
+    padding: 8rem var(--container-px) 3rem;
+  }
   .project-grid {
     grid-template-columns: 1fr;
+    gap: 1rem;
   }
   .col-span-2 {
     grid-column: span 1;
+  }
+  .project-card {
+    padding: 1.5rem;
+  }
+  .projects-header h1 {
+    font-size: clamp(2rem, 8vw, 3rem);
   }
 }
 

@@ -110,6 +110,26 @@
   margin-bottom: 4rem;
 }
 
+@media (max-width: 767px) {
+  .labs-page {
+    padding: 8rem var(--container-px) 3rem;
+  }
+  .labs-stat-line {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .labs-platforms {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .platform-card {
+    padding: 1.5rem;
+  }
+  .labs-header h1 {
+    font-size: clamp(2rem, 8vw, 3rem);
+  }
+}
+
 .platform-card-wrapper {
   position: relative;
   padding: 0.35rem; /* Outer tray padding */

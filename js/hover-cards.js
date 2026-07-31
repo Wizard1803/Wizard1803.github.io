@@ -125,43 +125,43 @@
 
     mm.add(
       {
-        normal: '(prefers-reduced-motion: no-preference)',
+        normal: '(prefers-reduced-motion: no-preference) and (min-width: 769px)',
+        mobile: '(prefers-reduced-motion: no-preference) and (max-width: 768px)',
         reduced: '(prefers-reduced-motion: reduce)'
       },
       (context) => {
-        const { reduced } = context.conditions;
+        const { reduced, normal, mobile } = context.conditions;
         if (reduced) return;
 
         // Header and intro entrance
         gsap.fromTo('.projects-header, .projects-intro',
-          { autoAlpha: 0, y: 40, filter: 'blur(8px)' },
+          { autoAlpha: 0, y: mobile ? 20 : 40, filter: mobile ? 'none' : 'blur(8px)' },
           {
             autoAlpha: 1,
             y: 0,
-            filter: 'blur(0px)',
-            duration: 1.2,
+            filter: mobile ? 'none' : 'blur(0px)',
+            duration: mobile ? 0.8 : 1.2,
             ease: 'expo.out',
             stagger: 0.1
           }
         );
 
-        // Cards staggered entrance with 3D slight rotation
+        // Cards staggered entrance
         gsap.fromTo('.project-card-wrapper',
-          { autoAlpha: 0, y: 60, filter: 'blur(10px)', rotationX: -5 },
+          { autoAlpha: 0, y: mobile ? 30 : 60, filter: mobile ? 'none' : 'blur(10px)', rotationX: mobile ? 0 : -5 },
           {
-            autoAlpha: 1,
-            y: 0,
-            filter: 'blur(0px)',
-            rotationX: 0,
-            stagger: 0.15,
-            duration: 1.4,
-            ease: 'expo.out',
-            transformPerspective: 1000,
             scrollTrigger: {
               trigger: '.project-grid',
               start: 'top 85%',
-              once: true
-            }
+            },
+            autoAlpha: 1,
+            y: 0,
+            filter: mobile ? 'none' : 'blur(0px)',
+            rotationX: 0,
+            duration: mobile ? 0.8 : 1.2,
+            ease: 'expo.out',
+            stagger: mobile ? 0.05 : 0.1, // Throttled stagger on mobile
+            clearProps: 'filter,transform'
           }
         );
       }

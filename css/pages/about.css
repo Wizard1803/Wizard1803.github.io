@@ -100,6 +100,23 @@
   gap: 1.5rem;
 }
 
+@media (max-width: 767px) {
+  .about-page {
+    padding: 8rem var(--container-px) 3rem;
+  }
+  .skill-bar-item {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  .skill-bar-label {
+    margin-bottom: 0.25rem;
+  }
+  .skill-bar-value {
+    text-align: right;
+    margin-top: -1.75rem;
+  }
+}
+
 .skill-bar-label {
   font-family: var(--font-mono);
   font-size: 0.8rem;

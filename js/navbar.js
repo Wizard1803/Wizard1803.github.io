@@ -64,7 +64,8 @@ function initNavbar() {
     const magneticPull = 8; // Max pixels to pull the text
 
     link.addEventListener('mousemove', (e) => {
-      // Don't apply magnetic physics on touch devices
+      // Don't apply magnetic physics on touch devices or small screens
+      if (window.innerWidth <= 1024) return;
       if (window.utils && window.utils.isTouchDevice && window.utils.isTouchDevice()) return;
 
       const rect = link.getBoundingClientRect();
@@ -103,6 +104,7 @@ function initNavbar() {
     const cmdPull = 6; // slightly less pull for the button
     
     cmdTrigger.addEventListener('mousemove', (e) => {
+      if (window.innerWidth <= 1024) return;
       if (window.utils && window.utils.isTouchDevice && window.utils.isTouchDevice()) return;
       
       const rect = cmdTrigger.getBoundingClientRect();
