@@ -425,3 +425,22 @@ Log anything encountered mid-build that the source docs didn't clearly answer. F
 - Flagged remaining user action items: The PDF resume and favicon assets must be manually added to the repository, and the GitHub URLs for the 3 projects must be filled out in `data/content.json` when the user is ready.
 
 **Status:** Project complete. Ready for manual `git push` to GitHub Pages.
+
+---
+
+### Session 16 — Analog Signature Placement (Caveat Font)
+**Date:** 2026-08-01
+**Agent:** Antigravity
+**Summary:** Discussed placement for the user's handwritten name (`.hero-subtitle` / Caveat font) which was removed from the home hero dashboard.
+
+**Future Considerations (Logged per user request):**
+- **Option 2 (The Analog Bento Card):** Placing the signature inside a dedicated, rotated glass card in the `projects.html` or `labs.html` grid to break the rigid structure (High-End Asymmetrical Bento style).
+Vibe: The Asymmetrical Bento & Materials/Depth
+How: We create a small, dedicated glass card in the projects.html or labs.html grid. Instead of holding project data, it just holds your handwritten name, maybe overlapping a subtle fingerprint SVG or a "Verified" stamp, with a very soft ambient shadow.
+Why it works: High-end design loves asymmetry. A card that serves no purely functional purpose other than establishing your human brand provides a "breathing moment" in a dense layout.
+
+- **Option 4 (The Floating Watermark):** A global, ethereal watermark placed in the bottom-right corner of the viewport across all pages (except Home), softly blurred behind the glass panels (Apple-style depth).
+How: We place it globally, but anchored to the bottom-right corner of the viewport on every page except Home. It sits behind the glass elements, slightly blurred, like an engraving on the inside of the dashboard visor.
+Why it works: It acts as a continuous tether to your identity without taking up structural space in the DOM
+
+**Next step:** The user will decide between Option 1 (Dossier Sign-Off on About Page) and Option 3 (Transmission Origin on Contact Page) for immediate implementation.

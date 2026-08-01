@@ -287,7 +287,6 @@
 .project-card .hover-card-preview.active {
   opacity: 1;
   transform: translateY(0);
-  pointer-events: auto;
 }
 
 .hover-preview-text {

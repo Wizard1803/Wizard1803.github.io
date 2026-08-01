@@ -34,8 +34,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e) {
       mouseX = e.clientX;
       mouseY = e.clientY;
-      sessionStorage.setItem('cursorX', mouseX);
-      sessionStorage.setItem('cursorY', mouseY);
     }
 
     // Check if the cursor is hidden by another script (like hero.js)
@@ -59,6 +57,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.addEventListener('mousemove', (e) => {
     requestAnimationFrame(() => updateCursor(e));
+  });
+
+  // Persist cursor position only once on page unload (not on every mousemove)
+  window.addEventListener('beforeunload', () => {
+    sessionStorage.setItem('cursorX', mouseX);
+    sessionStorage.setItem('cursorY', mouseY);
   });
 
   // Handle clickable elements

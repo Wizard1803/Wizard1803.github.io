@@ -21,6 +21,7 @@
     renderTags(data);
     renderCerts(data);
     renderEducation(data);
+    renderSignature(data);
     animateSkillBars();
     animateEntrance();
   }
@@ -109,6 +110,14 @@
     `;
   }
 
+  // ---- SIGNATURE ----
+  function renderSignature(data) {
+    const sigEl = document.getElementById('about-signature');
+    if (sigEl && data.identity && data.identity.heroSubtitle) {
+      sigEl.textContent = data.identity.heroSubtitle;
+    }
+  }
+
   // ---- GSAP: Skill bar fill animation on scroll ----
   function animateSkillBars() {
     if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
@@ -187,6 +196,22 @@
             }
           );
         });
+
+        // Dedicated trigger for the signature since it sits at the absolute bottom
+        gsap.fromTo('.dossier-sign-off',
+          { autoAlpha: 0, filter: 'blur(8px)' },
+          {
+            autoAlpha: 1,
+            filter: 'blur(0px)',
+            duration: 1.5,
+            ease: 'expo.out',
+            scrollTrigger: {
+              trigger: '.dossier-sign-off',
+              start: 'top bottom', // Trigger as soon as the top of it enters the viewport
+              once: true
+            }
+          }
+        );
 
         // Tag pills stagger
         gsap.fromTo('.tags-wrap .tag-pill', 
