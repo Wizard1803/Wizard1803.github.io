@@ -5,18 +5,18 @@
   --bg: #080a0c;
   --bg2: #0d1117;
   --dim: #1a1f26;
-  --muted: #6b7a90; /* Brightened from #3a4250 for readability */
+  --muted: #6b7a90;
   --text: #c8d0dc;
   --text-bright: #eef2f7;
   --accent: #e8ff00;
   --accent2: #ff4500;
-  
+
   /* Typography */
   --font-display: 'Bebas Neue', sans-serif;
   --font-script: 'Caveat', cursive;
   --font-mono: 'Share Tech Mono', monospace;
   --font-body: 'Rajdhani', sans-serif;
-  
+
   /* Fluid Typography */
   --font-size-min: 11px;
   --font-size-base: clamp(1rem, 1vw + 0.5rem, 1.125rem);
@@ -24,13 +24,13 @@
   --font-size-xl: clamp(1.5rem, 2vw + 1rem, 2rem);
   --font-size-2xl: clamp(2rem, 3vw + 1.25rem, 3rem);
   --font-size-3xl: clamp(3rem, 5vw + 1.5rem, 5rem);
-  
+
   /* Fluid Spacing */
   --spacing-sm: clamp(0.5rem, 1vw + 0.25rem, 0.75rem);
   --spacing-md: clamp(1rem, 2vw + 0.5rem, 1.5rem);
   --spacing-lg: clamp(2rem, 4vw + 1rem, 3rem);
   --spacing-xl: clamp(3rem, 6vw + 1.5rem, 5rem);
-  
+
   /* Container Padding */
   --container-px: clamp(1rem, 5vw, 4rem);
 }
@@ -42,4 +42,3 @@
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
 }
-
