@@ -69,24 +69,34 @@
   "certifications": {
     "completed": [
       {
+        "name": "Computer Networks and Internet Protocol",
+        "issuer": "NPTEL — IIT Kharagpur",
+        "date": "2024"
+      },
+      {
+        "name": "Cyber Security 101",
+        "issuer": "TryHackMe",
+        "date": "2026"
+      },
+      {
         "name": "Oracle Cloud Infrastructure Foundations Associate",
         "issuer": "Oracle",
-        "date": "2024"
+        "date": "2026"
       },
       {
         "name": "Oracle Certified Professional: Java SE 17 Developer",
         "issuer": "Oracle",
-        "date": "2024"
+        "date": "2025"
       },
       {
         "name": "Oracle APEX Cloud Developer Certified Professional",
         "issuer": "Oracle",
-        "date": "2024"
+        "date": "2025"
       },
       {
-        "name": "Computer Networks and Internet Protocol",
-        "issuer": "NPTEL — IIT Kharagpur",
-        "date": "Completed"
+        "name": "Oracle Cloud Infrastructure Architect Associate",
+        "issuer": "Oracle",
+        "date": "2026"
       }
     ],
     "inProgress": [
