@@ -67,20 +67,6 @@
 
     let html = '';
 
-    // Completed certs
-    if (data.certifications.completed) {
-      data.certifications.completed.forEach(cert => {
-        html += `
-          <div class="cert-card-wrapper">
-            <div class="cert-card">
-              <div class="cert-card-name">${cert.name}</div>
-              <div class="cert-card-issuer">${cert.issuer}</div>
-              <div class="cert-card-date">${cert.date}</div>
-            </div>
-          </div>`;
-      });
-    }
-
     // In-progress certs
     if (data.certifications.inProgress) {
       data.certifications.inProgress.forEach(cert => {
@@ -90,6 +76,20 @@
               <div class="cert-card-name">${cert.name}</div>
               <div class="cert-card-issuer">${cert.status}</div>
               <div class="cert-card-date">${cert.target}</div>
+            </div>
+          </div>`;
+      });
+    }
+
+    // Completed certs
+    if (data.certifications.completed) {
+      data.certifications.completed.forEach(cert => {
+        html += `
+          <div class="cert-card-wrapper">
+            <div class="cert-card">
+              <div class="cert-card-name">${cert.name}</div>
+              <div class="cert-card-issuer">${cert.issuer}</div>
+              <div class="cert-card-date">${cert.date}</div>
             </div>
           </div>`;
       });

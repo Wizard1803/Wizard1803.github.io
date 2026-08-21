@@ -67,6 +67,13 @@
     "years": "2023 – 2027"
   },
   "certifications": {
+    "inProgress": [
+      {
+        "name": "HackTheBox CPTS (Certified Penetration Testing Specialist)",
+        "status": "Learning path — exam not yet purchased",
+        "target": "Ongoing"
+      }
+    ],
     "completed": [
       {
         "name": "Computer Networks and Internet Protocol",
@@ -98,25 +105,19 @@
         "issuer": "Oracle",
         "date": "2026"
       }
-    ],
-    "inProgress": [
-      {
-        "name": "HackTheBox CPTS (Certified Penetration Testing Specialist)",
-        "status": "Learning path — exam not yet purchased",
-        "target": "Ongoing"
-      }
     ]
   },
   "projectsIntro": "Built to learn, not to impress — each one exists to help me understand how real attacks actually work. Rough edges, on purpose.",
   "projects": [
     {
       "name": "Hashtrace",
-      "status": "in-progress",
-      "description": "CLI tool for deep password strength analysis using mathematical entropy scoring, HaveIBeenPwned API breach lookup (800M+ records), RockYou wordlist matching (14M+ passwords), and mutation detection.",
+      "status": "v3-completed",
+      "description": "Privacy-first password intelligence CLI. Evaluates credential strength against 4 threat models, audits bulk dumps using k-Anonymity, and features a custom pure-Python MD4 implementation for NTLM cracking.",
       "stack": [
         "Python",
-        "HaveIBeenPwned API",
-        "RockYou Wordlist"
+        "Cryptography",
+        "REST APIs",
+        "k-Anonymity"
       ],
       "github": "https://github.com/Wizard1803/Hashtrace",
       "live": null
