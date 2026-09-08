@@ -1,6 +1,7 @@
 <!-- labs.html — Labs page -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,32 +12,34 @@
   <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
   <link rel="manifest" href="assets/favicon/site.webmanifest">
   <title>Labs — WIZARD</title>
-  <meta name="description" content="HackTheBox and TryHackMe activity — CTF stats, lab completions, and security toolstack.">
+  <meta name="description"
+    content="HackTheBox and TryHackMe activity — CTF stats, lab completions, and security toolstack.">
 
   <!-- CSS -->
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/transitions.css">
-  
-  <link rel="stylesheet" href="css/pages/labs.css">
+
+  <link rel="stylesheet" href="css/pages/labs.css?v=4">
 
   <!-- GSAP CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
 
-  
+
   <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js" defer></script>
   <!-- JS -->
   <script src="js/utils.js" defer></script>
-  <script src="js/content-loader.js" defer></script>
+  <script src="js/content-loader.js?v=2" defer></script>
   <script src="js/cursor.js" defer></script>
   <script src="js/nav.js" defer></script>
   <script src="js/command-palette.js" defer></script>
   <script src="js/navbar.js" defer></script>
-  <script src="js/labs.js" defer></script>
-  <script src="js/magnetic-physics.js" defer></script>
+  <script src="js/labs.js?v=4" defer></script>
+  <script src="js/magnetic-physics.js?v=2" defer></script>
 </head>
+
 <body>
   <!-- Global Nav Capsule -->
   <nav class="nav-capsule glass-panel">
@@ -51,7 +54,8 @@
       <a href="labs.html" class="nav-link active" data-text="Labs"><span class="nav-text">Labs</span></a>
       <a href="contact.html" class="nav-link" data-text="Contact"><span class="nav-text">Contact</span></a>
     </div>
-    <button class="nav-cmd-trigger" aria-label="Open Command Palette"><span class="mono" style="font-size: 0.85em; opacity: 0.7;">CTRL</span> K</button>
+    <button class="nav-cmd-trigger" aria-label="Open Command Palette"><span class="mono"
+        style="font-size: 0.85em; opacity: 0.7;">CTRL</span> K</button>
   </nav>
 
   <main id="swup-root">
@@ -80,10 +84,8 @@
             <h2>Writeups</h2>
             <span class="header-rule"></span>
           </div>
-          <div class="writeups-placeholder">
-            <span class="writeups-placeholder-text">
-              AWAITING INPUT<span class="writeups-cursor"></span>
-            </span>
+          <div class="labs-writeups-grid" id="labs-writeups">
+            <!-- Rendered dynamically by labs.js -->
           </div>
         </div>
 
@@ -91,4 +93,5 @@
     </section>
   </main>
 </body>
+
 </html>

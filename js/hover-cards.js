@@ -4,8 +4,6 @@
 (function () {
   'use strict';
 
-  const HOVER_DELAY = 300; // ms before preview shows on desktop hover
-
   function init(data) {
     populateIntro(data);
     renderProjectCards(data);
@@ -90,8 +88,6 @@
       const preview = card.querySelector('.hover-card-preview');
       if (!preview) return;
 
-      let hoverTimeout = null;
-
       if (isTouch) {
         // Touch: tap to toggle
         wrapper.addEventListener('click', (e) => {
@@ -100,15 +96,12 @@
           preview.classList.toggle('active');
         });
       } else {
-        // Desktop: hover with delay
+        // Desktop: immediate fluid reveal (zero artificial delay per Apple Design §1)
         wrapper.addEventListener('mouseenter', () => {
-          hoverTimeout = setTimeout(() => {
-            preview.classList.add('active');
-          }, HOVER_DELAY);
+          preview.classList.add('active');
         });
 
         wrapper.addEventListener('mouseleave', () => {
-          clearTimeout(hoverTimeout);
           preview.classList.remove('active');
         });
       }
@@ -161,7 +154,7 @@
             duration: mobile ? 0.8 : 1.2,
             ease: 'expo.out',
             stagger: mobile ? 0.05 : 0.1, // Throttled stagger on mobile
-            clearProps: 'filter,transform'
+            clearProps: 'filter' // Preserve transform so VanillaTilt & magnetic physics operate seamlessly
           }
         );
       }

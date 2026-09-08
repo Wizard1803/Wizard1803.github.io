@@ -443,4 +443,66 @@ Why it works: High-end design loves asymmetry. A card that serves no purely func
 How: We place it globally, but anchored to the bottom-right corner of the viewport on every page except Home. It sits behind the glass elements, slightly blurred, like an engraving on the inside of the dashboard visor.
 Why it works: It acts as a continuous tether to your identity without taking up structural space in the DOM
 
-**Next step:** The user will decide between Option 1 (Dossier Sign-Off on About Page) and Option 3 (Transmission Origin on Contact Page) for immediate implementation.
+- **Next step:** The user will decide between Option 1 (Dossier Sign-Off on About Page) and Option 3 (Transmission Origin on Contact Page) for immediate implementation.
+
+---
+
+### Session 17 — Labs Writeups Section & UI Polish
+**Date:** 2026-09-08
+**Agent:** Antigravity
+**Summary:** Implemented and polished the Labs writeups card section with double-bezel aesthetic, motion physics, and design token refinements.
+
+**What was done:**
+- **Writeups Integration:** Added dynamic rendering for writeup entries from `data/content.json` in `labs.js` and `labs.html`.
+- **Double-Bezel Architecture:** Implemented outer tray (`.writeup-card-wrapper`) and concentric inner core (`.writeup-card`) matching the platform card hierarchy with VanillaTilt and magnetic physics integration.
+- **UI Polish Execution (Items 2, 3, 4, 6):**
+  - **Item 2 (Agency Curves):** Replaced default `ease` with the agency curve `cubic-bezier(0.32, 0.72, 0, 1)` on wrapper border transitions, inner core background transitions, and box-shadow shifts.
+  - **Item 3 (Tag Micro-Interactions):** Added `display: inline-block` and a tactile `transform: translateY(-1px)` with calibrated hover border brightening on `.writeup-tag`.
+  - **Item 4 (Nested Icon Inner Highlight):** Added inset shadow `box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1)` on `.writeup-link-icon`, boosting to `rgba(232, 255, 0, 0.3)` on card hover.
+  - **Item 6 (Accessibility & Reduced Motion):** Expanded `prefers-reduced-motion: reduce` to explicitly zero out transitions on `.writeup-card`, `.writeup-link-icon`, and `.writeup-tag`.
+- **Verification:** Verified desktop, hover states, mobile viewports, and reduced-motion compliance via automated Playwright runs.
+
+---
+
+### Session 18 — Projects Page Motion & Interaction Polish (Apple Design & Framer Motion Principles)
+**Date:** 2026-09-08
+**Agent:** Antigravity
+**Summary:** Upgraded the Projects page cards and preview interactions applying principles from `gsap-core`, `motion-framer`, and `apple-design`.
+
+**What was done:**
+- **Response & Latency Elimination (Apple §1):**
+  - Removed the 300ms artificial `HOVER_DELAY` timeout in `hover-cards.js`. The glass preview panel now responds immediately upon hover.
+  - Added an instant physical depression state `:active { transform: scale(0.98); }` to `.project-card-wrapper` for immediate tactile feedback on press.
+- **Critically Damped Spring Preview (Apple §4 & GSAP Core):**
+  - Replaced bouncy overshoot with a critically damped `cubic-bezier(0.32, 0.72, 0, 1)` transition curve on `.hover-card-preview`.
+  - Replaced generic browser `ease` with agency bezier curves on card wrappers, inner cards, and link arrows.
+- **Depth & Materials (Apple §12):**
+  - Added recessed specular rim highlights (`box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15)`) to `.project-link-arrow`, boosting to `rgba(232, 255, 0, 0.4)` on card hover.
+- **Bug Fix & Tag Visibility Restoration:**
+  - Discovered that an overly-broad `.tag-pill` rule in `components.css` anti-FOUC block was hiding tech stack tags on all pages outside About.
+  - Scoped the rule to `.tags-wrap .tag-pill`, immediately restoring visibility to the project stack tags and Labs HTB toolstack tags.
+  - Added floating mass micro-interactions (`transform: translateY(-1px)`) to `.project-stack .tag-pill` on hover.
+- **GSAP ↔ Tilt Coexistence:**
+  - Modified `hover-cards.js` entrance animation `clearProps` from `'filter,transform'` to `'filter'`, preserving VanillaTilt and magnetic physics matrices upon entrance completion.
+- **Verification:**
+  - Automated Playwright verification confirmed: card count 3, 150ms instant preview activation, tag float-up transforms, mobile layout stability, and zero errors across all 5 site pages.
+
+---
+
+### Session 19 — Site-Wide UI & CSS Consistency Overhaul
+**Date:** 2026-09-08
+**Agent:** Antigravity
+**Summary:** Standardized all action arrows, glassmorphic badges, card tray physics, active press states, and animation curves across all 5 pages.
+
+**What was done:**
+- **Action Badge Consistency (Tier 1 - 36×36px):**
+  - Standardized `.channel-arrow` (Contact), `.writeup-link-icon` (Labs), and `.cta-card-arrow` (Home) into circular frosted glass badges with hairline borders (`1px solid rgba(255, 255, 255, 0.08)`), top specular inset rim highlights (`box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15)`), and diagonal kinetic tension on hover (`transform: translate(4px, -4px) scale(1.08)`).
+- **Inline Link Badge Consistency (Tier 2 - 24×24px):**
+  - Standardized `.platform-link-arrow` (Labs) and `.project-link-arrow` (Projects) with matching 24px circular badges, hairline borders, and top specular rims.
+- **Instant Tactile Press Response (`apple-design` §1):**
+  - Added `:active { transform: scale(0.98); }` to `.contact-card-wrapper`, `.platform-card-wrapper`, `.writeup-card-wrapper`, `.project-card-wrapper`, `.cert-card-wrapper`, and `.cta-card`.
+- **Contact GSAP & Console Cleanliness:**
+  - Fixed deprecated `.channel-row` selector in `js/contact.js` and `css/components.css` to `.contact-card-wrapper`, resolving all 15 Greensock console warnings.
+- **Verification:**
+  - Automated Playwright suite verified all 5 pages: 0 console errors, 0 warnings, verified computed styles for specular shadows, borders, and hover states.
+

@@ -11,7 +11,7 @@ window.initMagneticPhysics = function() {
   if (typeof gsap === 'undefined') return;
 
   // The elements that should receive magnetic tracking
-  const wrapperSelector = '.cta-card-wrapper, .project-card-wrapper, .cert-card-wrapper, .lab-card-wrapper, .platform-card-wrapper, .contact-card-wrapper';
+  const wrapperSelector = '.cta-card-wrapper, .project-card-wrapper, .cert-card-wrapper, .lab-card-wrapper, .platform-card-wrapper, .writeup-card-wrapper, .contact-card-wrapper';
   const wrappers = document.querySelectorAll(wrapperSelector);
 
   wrappers.forEach(wrapper => {
@@ -25,6 +25,7 @@ window.initMagneticPhysics = function() {
                     wrapper.querySelector('.cert-card') ||
                     wrapper.querySelector('.lab-card') ||
                     wrapper.querySelector('.platform-card') ||
+                    wrapper.querySelector('.writeup-card') ||
                     wrapper.querySelector('.contact-card');
                     
     if (!innerCard) return;
@@ -32,7 +33,7 @@ window.initMagneticPhysics = function() {
     const isCTA = wrapper.classList.contains('cta-card-wrapper');
 
     // Configurational internal elements for contrary parallax or extreme depth
-    const arrow = wrapper.querySelector('.cta-card-arrow, .project-link-arrow, .lab-link-arrow');
+    const arrow = wrapper.querySelector('.cta-card-arrow, .project-link-arrow, .lab-link-arrow, .writeup-link-icon');
     const icon = wrapper.querySelector('.cta-card-icon');
     const watermark = wrapper.querySelector('.project-card-number');
 

@@ -3,7 +3,7 @@
 window.siteContent = null;
 
 // Expose a promise that resolves with the content data
-window.siteContentPromise = fetch('data/content.json')
+window.siteContentPromise = fetch('data/content.json?v=' + new Date().getTime())
   .then(response => {
     if (!response.ok) {
       throw new Error('Network response was not ok');

@@ -101,7 +101,15 @@
       "roomsCompleted": "70+",
       "badges": 10
     },
-    "statLine": "Top 7% on TryHackMe • 50+ Day Streak • 70+ Rooms Completed"
+    "statLine": "Top 7% on TryHackMe • 50+ Day Streak • 70+ Rooms Completed",
+    "writeups": [
+      {
+        "title": "The Danger of Low-Hanging Fruit: HTB Starting Point Tier 0",
+        "url": "https://piyushblogss.hashnode.dev/htb-starting-point-tier-0",
+        "description": "A hands-on security breakdown of HTB Tier 0. Explore how unauthenticated Telnet, FTP, SMB, and Redis services expose networks and how to remediate them.",
+        "tags": ["cybersecurity", "penetration testing", "HackTheBox", "Beginners", "HTB Machines"]
+      }
+    ]
   },
 
   "heroArcs": {

@@ -7,6 +7,7 @@
   function init(data) {
     renderStats(data);
     renderPlatforms(data);
+    renderWriteups(data);
     animateEntrance();
   }
 
@@ -91,6 +92,41 @@
     }
   }
 
+  // ---- WRITEUPS CARDS ----
+  function renderWriteups(data) {
+    const container = document.getElementById('labs-writeups');
+    if (!container || !data.labs || !data.labs.writeups || !data.labs.writeups.length) return;
+
+    let html = '';
+    data.labs.writeups.forEach(writeup => {
+      const tagsHtml = writeup.tags ? writeup.tags.map(tag => `<span class="writeup-tag">${tag}</span>`).join('') : '';
+      
+      html += `
+        <a href="${writeup.url}" class="writeup-card-wrapper" target="_blank" rel="noopener noreferrer" data-tilt data-tilt-glare data-tilt-max-glare="0.15" data-tilt-max="5" data-tilt-speed="400" data-tilt-perspective="1500">
+          <div class="writeup-card">
+            <div class="writeup-header">
+              <h3 class="writeup-title">${writeup.title}</h3>
+              <span class="writeup-link-icon">↗</span>
+            </div>
+            <p class="writeup-description">${writeup.description}</p>
+            <div class="writeup-tags">${tagsHtml}</div>
+          </div>
+        </a>
+      `;
+    });
+
+    container.innerHTML = html;
+
+    if (typeof VanillaTilt !== 'undefined') {
+      VanillaTilt.init(container.querySelectorAll('.writeup-card-wrapper'));
+    }
+
+    // Initialize Magnetic Physics for writeup cards
+    if (typeof window.initMagneticPhysics === 'function') {
+      window.initMagneticPhysics();
+    }
+  }
+
   // ---- GSAP: Entrance animations ----
   function animateEntrance() {
     if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
@@ -149,8 +185,8 @@
           }
         );
 
-        // Writeups section
-        gsap.fromTo('.labs-writeups-section',
+        // Writeups section header
+        gsap.fromTo('.labs-writeups-section .section-header',
           { autoAlpha: 0, y: 40, filter: 'blur(8px)' },
           {
             autoAlpha: 1,
@@ -160,7 +196,27 @@
             ease: 'expo.out',
             scrollTrigger: {
               trigger: '.labs-writeups-section',
-              start: 'top 85%',
+              start: 'top 95%',
+              once: true
+            }
+          }
+        );
+
+        // Writeups cards
+        gsap.fromTo('.writeup-card-wrapper',
+          { autoAlpha: 0, y: 50, filter: 'blur(10px)', rotationX: -5 },
+          {
+            autoAlpha: 1,
+            y: 0,
+            filter: 'blur(0px)',
+            rotationX: 0,
+            stagger: 0.15,
+            duration: 1.4,
+            ease: 'expo.out',
+            transformPerspective: 1000,
+            scrollTrigger: {
+              trigger: '.labs-writeups-section',
+              start: 'top 95%',
               once: true
             }
           }

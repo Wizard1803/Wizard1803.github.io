@@ -142,6 +142,13 @@ Top 7% on TryHackMe • 50+ Day Streak • 70+ Rooms Completed
 
 **Badge count note:** left out of headline stats deliberately — rank, streak, and room count carry the story better on their own. Fine to show badge count further down the Labs page in a detailed stats table if wanted later.
 
+### Writeups Section (Labs Page)
+- Title: **The Danger of Low-Hanging Fruit: HTB Starting Point Tier 0**
+- URL: `https://piyushblogss.hashnode.dev/htb-starting-point-tier-0`
+- Description: *A hands-on security breakdown of HTB Tier 0. Explore how unauthenticated Telnet, FTP, SMB, and Redis services expose networks and how to remediate them.*
+- Tags: `cybersecurity`, `penetration testing`, `HackTheBox`, `Beginners`, `HTB Machines`
+- Design note: Card uses double-bezel wrapper with agency cubic-bezier transitions, micro-badge tags, dynamic runtime loading via `content.json`, and magnetic/tilt physics. Dates and raw text URLs omitted to maintain clean agency aesthetic.
+
 ### Hero Arc Stat Mapping (RPM / KMH hover-reveal, per `COMPONENTS.md` §5.1)
 
 | Arc | Visible label | Hover-reveal | Fill level |

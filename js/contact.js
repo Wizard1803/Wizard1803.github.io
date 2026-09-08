@@ -187,8 +187,8 @@
           }
         );
 
-        // Channel rows stagger with 3D lift
-        gsap.fromTo('.channel-row',
+        // Contact cards stagger with 3D lift
+        gsap.fromTo('.contact-card-wrapper',
           { autoAlpha: 0, y: 50, filter: 'blur(8px)', rotationX: -5 },
           {
             autoAlpha: 1,
@@ -199,7 +199,8 @@
             duration: 1.4,
             ease: 'expo.out',
             delay: 0.2,
-            transformPerspective: 1000
+            transformPerspective: 1000,
+            clearProps: 'filter'
           }
         );
       }

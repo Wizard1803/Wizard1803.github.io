@@ -200,12 +200,18 @@
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 1.5rem;
   background: rgba(255, 255, 255, 0.02);
-  transition: border-color 0.4s ease;
+  transition: border-color 0.4s cubic-bezier(0.32, 0.72, 0, 1), transform 0.1s ease-out;
   transform-style: preserve-3d;
+  cursor: pointer;
+  will-change: transform;
 }
 
 .cert-card-wrapper:hover {
   border-color: rgba(232, 255, 0, 0.25);
+}
+
+.cert-card-wrapper:active {
+  transform: scale(0.98);
 }
 
 .cert-card {
@@ -219,7 +225,7 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  transition: background-color 0.4s ease, box-shadow 0.4s ease;
+  transition: background-color 0.4s cubic-bezier(0.32, 0.72, 0, 1), box-shadow 0.4s cubic-bezier(0.32, 0.72, 0, 1);
 }
 
 .cert-card-wrapper:hover .cert-card {
@@ -347,5 +353,10 @@
 @media (prefers-reduced-motion: reduce) {
   .skill-bar-fill {
     transition: none !important;
+  }
+
+  .cert-card-wrapper,
+  .cert-card {
+    transition: none;
   }
 }
