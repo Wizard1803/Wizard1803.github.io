@@ -20,7 +20,7 @@
     "stats": [
       {
         "label": "TRYHACKME RANK",
-        "value": 7,
+        "value": 3,
         "prefix": "TOP ",
         "suffix": "%"
       },
@@ -32,7 +32,7 @@
       },
       {
         "label": "ROOMS COMPLETED",
-        "value": 70,
+        "value": 180,
         "prefix": "",
         "suffix": "+"
       }
@@ -163,10 +163,10 @@
     },
     "thm": {
       "profile": "https://tryhackme.com/p/amritkumawat1803",
-      "rank": "Top 7%",
-      "streak": "50+ day streak",
-      "roomsCompleted": "70+",
-      "badges": 10
+      "rank": "Top 3%",
+      "streak": "60+ day streak",
+      "roomsCompleted": "180+",
+      "badges": 20
     },
     "statLine": "Top 7% on TryHackMe • 50+ Day Streak • 70+ Rooms Completed",
     "writeups": [
